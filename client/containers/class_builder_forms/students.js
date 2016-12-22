@@ -8,7 +8,7 @@ const StudentForm = ({ handleSubmit }) => (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="student_name">Student Name</label>
-        <Field name="Student Name" component="input" type="date" />
+        <Field name="Student Name" component="input" type="text" />
       </div>
       <button type="submit">Submit</button>
     </form>
