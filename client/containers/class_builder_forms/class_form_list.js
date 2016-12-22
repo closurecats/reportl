@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectForm } from '../../actions/index';
 import ClassMaker from './class-maker';
+import StudentForm from './students';
 import ScheduleForm from './scheduling';
 import ModuleForm from './modules';
 import AssetForm from './assets';
@@ -11,53 +12,29 @@ import AssignmentsForm from './assignments';
 import EventsForm from './events';
 import ExamsForm from './exams';
 
+const AppComponents = [['Basic Class', <ClassMaker />], ['Schedule Form', <ScheduleForm />],['Add Students', <StudentForm />], ['Module Form', <ModuleForm />], ['Asset Form', <AssetForm />], ['Exams Form', <ExamsForm />], ['Assignments Form', <AssignmentsForm />], ['Announcements Form', <AnnouncementsForm />], ['Events Form', <EventsForm />]];
+
 class FormList extends Component {
+
+  renderList() {
+    return (
+      AppComponents.map(component =>
+        <li>
+          <button onClick={() => { this.props.selectForm(component[1]); }}>
+            {component[0]}
+          </button>
+        </li>
+      )
+    );
+  }
+
 
   render() {
     return (
       <div>
         <h2>This is the Form List</h2>
         <ol>
-          <li>
-            <button onClick={() => { this.props.selectForm(<ClassMaker />); }}>
-              Class Maker
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<ScheduleForm />); }}>
-              Schedule Form
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<ModuleForm />); }}>
-              Module Form
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<AssetForm />); }}>
-              Asset Form
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<ExamsForm />); }}>
-              Exams Form
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<AssignmentsForm />); }}>
-              Assignments Form
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<AnnouncementsForm />); }}>
-              Announcements Form
-            </button>
-          </li>
-          <li>
-            <button onClick={() => { this.props.selectForm(<EventsForm />); }}>
-              Events Form
-            </button>
-          </li>
+          {this.renderList()}
         </ol>
       </div>
     );
