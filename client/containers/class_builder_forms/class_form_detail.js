@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ClassMaker from './class-maker';
+import StudentForm from './students';
 import ScheduleForm from './scheduling';
 import ModuleForm from './modules';
 import AssetForm from './assets';
@@ -14,7 +15,7 @@ class FormDetail extends Component {
   render() {
     return (
       <div>
-        { this.props.selectedForm }
+        { this.props.selectedForm[0] }
       </div>
     );
   }

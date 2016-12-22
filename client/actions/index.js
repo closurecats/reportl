@@ -25,7 +25,7 @@ export function makeNewClass(classes) {
 }
 
 export function getAllClasses() {
-  const request = axios.get('/api/users/1');
+  const request = axios.get('/api/users/');
   return {
     type: 'GET_CLASSES',
     payload: request,
