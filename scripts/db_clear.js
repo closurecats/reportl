@@ -7,15 +7,16 @@ const migrateConfig = {
 
 const rollback = () => knex.migrate.rollback(migrateConfig)
   .then((data) => {
-    console.log('rollback', data);
+    if (data[1].length) {
+      console.log(`Batch ${data[0]} run: ${data[1].length} migrations`);
+      console.log(data[1].join('\n'));
+    }
+
     return knex.migrate.currentVersion(migrateConfig);
-  })
-  .then((version) => {
-    console.log('version', version);
-    return version;
   });
 
 const goBack = () => rollback().then((version) => {
+  console.log('Version:', version);
   if (version === 'none') {
     return process.exit();
   }
