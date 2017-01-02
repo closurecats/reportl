@@ -9,22 +9,22 @@ const GraphModel = db.Model.extend({
   tableName: 'graph_data',
   hasTimestamps: false,
   departments() {
-    return this.hasMany('Department', 'department_id');
+    return this.belongsTo('Department', 'department_id');
   },
   course() {
-    return this.hasMany('Course', 'course_id');
+    return this.belongsTo('Course', 'course_id');
   },
   classes() {
-    return this.hasMany('Class', 'class_id');
+    return this.belongsTo('Class', 'class_id');
   },
   gradeableobjects() {
-    return this.hasMany('GradeableObjectModel', 'gradeableobject_id');
+    return this.belongsTo('GradeableObjectModel', 'gradeableobject_id');
   },
   gradeableobjecttypes() {
-    return this.hasMany('GradeableObjectType', 'gradeableobjecttype_id');
+    return this.belongsTo('GradeableObjectType', 'gradeableobjecttype_id');
   },
   users() {
-    return this.hasMany('User', 'student_id');
+    return this.belongsTo('User', 'student_id');
   },
 });
 

@@ -17,6 +17,7 @@ const graphDataController = {
 
   getAll(req, res) {
     GraphModel.fetchAll({
+      withRelated: ['departments', 'course', 'classes', 'gradeableobjects', 'gradeableobjecttypes', 'users'],
     })
     .then(gradeableobjectstypes => res.json(gradeableobjectstypes))
     .catch((err) => {
