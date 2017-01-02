@@ -10,8 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 router.get('/', fileController.getAll);
 router.get('/:id', fileController.getFileById);
-// TODO: Implement fileController.updateFileById
-// router.put('/:id', fileController.updateFileById);
+router.put('/:id', fileController.updateFileById);
 router.delete('/:id', fileController.deleteFileById);
 router.post('/', fileController.newFile);
 

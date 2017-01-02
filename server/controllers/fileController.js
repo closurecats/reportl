@@ -54,10 +54,85 @@ const fileController = {
       });
   },
 
-  // TODO: Implement function
-  // updateFileById(req, res) {
-  //
-  // },
+  /**
+   * Update a file by it's id
+   *  - use formidable to parse request
+   *  - check DB for file by id
+   *    - if no file send 404
+   *  - move current file to tempPath
+   *  - move inputFile to filePath
+   *  - change file.name in DB
+   *  - get updated DB entry
+   *  - send updated DB entry
+   *  - delete temp file
+   * @param  object req http request
+   * @param  object res http response
+   */
+  updateFileById(req, res) {
+    const id = req.params.id;
+    const tempNum = Math.floor(Math.random() * 1000);
+    const filePath = path.join(storagePath, './', id);
+    const tempPath = path.join(storagePath, './', `${id}-${tempNum}`);
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (error, fields, files) => {
+      const inputFile = files[Object.keys(files).pop()];
+
+      File.forge({ id })
+        .fetch()
+        .then((file) => {
+          if (file) {
+            return new Promise((resolve, reject) => {
+              fs.rename(filePath, tempPath, (err) => {
+                if (err) {
+                  console.log(`fileController.updateFileById.moveToTemp - Error: ${err}`);
+                  reject(err);
+                }
+                resolve(file);
+              });
+            });
+          }
+
+          return Promise.reject('No file by that id');
+        })
+        .then(file => new Promise((resolve, reject) => {
+          fs.rename(inputFile.path, filePath, (err) => {
+            if (err) {
+              console.log(`fileController.updateFileById.saveFile - Error: ${err}`);
+              reject(err);
+            }
+            resolve(file);
+          });
+        }))
+        .then((file) => {
+          file.set('name', inputFile.name);
+          return file.save();
+        })
+        .then(() => File.forge({ id }).fetch())
+        .then(file => res.json(file))
+        .then(() => new Promise((resolve, reject) => {
+          fs.unlink(tempPath, (err) => {
+            if (err) {
+              console.log(`fileController.updateFileById.deleteTempFile - Error: ${err}`);
+              reject(err);
+            }
+            resolve();
+          });
+        }))
+        .catch((err) => {
+          console.log(`fileController.updateFileById - Error: ${err}`);
+          res.json(400);
+
+          if (err !== 'No file by that id') {
+            fs.rename(tempPath, filePath, (er) => {
+              if (er) {
+                console.log(`fileController.updateFileById.revertTemp - Error: ${er}`);
+              }
+            });
+          }
+        });
+    });
+  },
 
   deleteFileById({ params: { id }, baseUrl, originalUrl }, res) {
     File.forge({ id })
