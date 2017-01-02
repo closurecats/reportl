@@ -107,12 +107,21 @@ export function updateClass(form) {
   };
 }
 
+
 export function uploadFile(files) {
   const data = new FormData();
   Object.keys(files.uploadedFile).forEach(key => data.append(key, files.uploadedFile[key]));
   const request = axios.post('/api/files', data);
   return {
     type: 'UPLOAD_FILE',
+    payload: request,
+  };
+}
+
+export function getChartData() {
+  const request = axios.get('/api/graphdata/');
+  return {
+    type: 'GET_GRAPH_DATA',
     payload: request,
   };
 }

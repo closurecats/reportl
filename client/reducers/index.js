@@ -13,6 +13,7 @@ import UpdateClassInfo from './update_class_reducer';
 import GetStudents from './get_students_reducer';
 import GetTeachers from './get_teachers_reducer';
 import UploadFile from './post_file_reducer';
+import GetGradeData from './grade_data_reducer';
 
 const rootReducer = combineReducers({
   login: LoginField,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   classId: GetClassId,
   classInfo: UpdateClassInfo,
   uploadedFile: UploadFile,
+  gradeData: GetGradeData,
 });
 
 export default rootReducer;

@@ -16,6 +16,7 @@ import RenderUsers from './components/render_users';
 import UpdateProfile from './components/render_profile_builder';
 import RenderProfile from './components/render_profile';
 import RenderClasses from './components/render_classes';
+import RenderGradeGraph from './components/render_grade_graph';
 
 
 const logger = createLogger();
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path="/users" component={RenderUsers} />
         <Route path="/updateprofile" component={UpdateProfile} />
         <Route path="/profile" component={RenderProfile} />
+        <Route path="/gradegraph" component={RenderGradeGraph} />
       </Route>
     </Router>
   </Provider>
