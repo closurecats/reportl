@@ -26,4 +26,10 @@ const authController = {
   },
 };
 
-module.exports = authController;
+const authMiddleware = {
+  userInject(req, res, next) {
+    next();
+  },
+};
+
+module.exports = { authController, authMiddleware };
