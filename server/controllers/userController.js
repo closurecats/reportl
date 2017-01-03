@@ -38,7 +38,6 @@ const userController = {
   },
 
   newUser({ body: userData, baseUrl, originalUrl }, res) {
-    console.log('userData from within newuser function', userData);
     User.forge(userData)
       .save()
       .then((user) => {
