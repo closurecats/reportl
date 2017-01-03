@@ -18,7 +18,7 @@ const authController = {
       .catch(err => res.status(400).json(err));
   },
   register({ body: userData }, res) {
-    User.forge({ userData })
+    User.forge(userData)
       .save()
       .then(user => jwt.sign(JSON.stringify(user), secret))
       .then(token => res.json({ token }))
