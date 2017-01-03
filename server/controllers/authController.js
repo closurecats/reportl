@@ -28,7 +28,23 @@ const authController = {
 
 const authMiddleware = {
   userInject(req, res, next) {
-    next();
+    const token = req.headers['x-auth-token'];
+
+    new Promise((resolve, reject) => {
+      jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(decoded);
+      });
+    })
+    .then((user) => {
+      req.user = user;
+    })
+    .catch(() => {
+      req.user = false;
+    })
+    .then(() => next());
   },
 };
 
