@@ -2,7 +2,9 @@ const User = require('../models/userModel');
 
 const userController = {
   getAll(req, res) {
-    User.fetchAll()
+    User.fetchAll({
+      withRelated: ['classes', 'type'],
+    })
       .then(users => res.json(users))
       .catch((err) => {
         console.log(`userController.getAll - Error: ${err}`);

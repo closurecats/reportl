@@ -9,6 +9,8 @@ const moduleRouter = require('./moduleRouter');
 const gradeableobjectsRouter = require('./gradeableobjectsRouter');
 const gradeableobjectsTypeRouter = require('./gradeableobjectsTypeRouter');
 const graphdataRouter = require('./graphdataRouter');
+const meetingsRouter = require('./meetingsRouter');
+const calendarRouter = require('./calendarRouter');
 
 if (process.env.NODE_ENV !== 'production') {
   router.all('*', (req, res, next) => {
@@ -79,5 +81,15 @@ router.use('/graphdata', (req, res, next) => {
   console.log('apiRouter -> graphdataRouter');
   next();
 }, graphdataRouter);
+
+router.use('/meetings', (req, res, next) => {
+  console.log('apiRouter -> meetingsRouter');
+  next();
+}, meetingsRouter);
+
+router.use('/calendar', (req, res, next) => {
+  console.log('apiRouter -> calendarRouter');
+  next();
+}, calendarRouter);
 
 module.exports = router;

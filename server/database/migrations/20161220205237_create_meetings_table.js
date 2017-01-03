@@ -1,7 +1,6 @@
 exports.up = knex => knex.schema.createTable('meetings', (table) => {
   table.increments('id').primary();
   table.integer('class_id').unsigned();
-  table.date('date');
   table.time('start_time');
   table.time('end_time');
   table.timestamps(true, true);

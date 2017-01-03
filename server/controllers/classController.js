@@ -1,5 +1,6 @@
 const Class = require('../models/classModel');
 require('../models/moduleModel');
+require('../models/userModel');
 
 const classController = {
   getClassById({ params: { id } }, res) {
@@ -44,7 +45,7 @@ const classController = {
 
   getAll(req, res) {
     Class.fetchAll({
-      withRelated: ['course', 'modules'],
+      withRelated: ['course', 'modules', 'users'],
     })
     .then(classes => res.json(classes))
     .catch((err) => {

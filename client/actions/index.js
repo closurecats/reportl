@@ -88,7 +88,7 @@ export function createProfileInformation(profile) {
 }
 
 export function getProfileInformation() {
-  const request = axios.get('/api/users/1');
+  const request = axios.get('/api/users/8');
   return {
     type: 'GET_PROFILE',
     payload: request,
@@ -113,6 +113,48 @@ export function updateClass(form) {
   const request = axios.put(`/api/classes/${form.id}`, form);
   return {
     type: 'UPDATE_CLASS_INFO',
+    payload: request,
+  };
+}
+
+export function getDepartmentInformation() {
+  const request = axios.get('api/departments');
+  return {
+    type: 'GET_DEPARTMENTS',
+    payload: request,
+  };
+}
+
+export function uploadFile(files) {
+  const data = new FormData();
+  Object.keys(files.uploadedFile).forEach(key => data.append(key, files.uploadedFile[key]));
+  const request = axios.post('/api/files', data);
+  return {
+    type: 'UPLOAD_FILE',
+    payload: request,
+  };
+}
+
+export function getChartData() {
+  const request = axios.get('/api/graphdata/');
+  return {
+    type: 'GET_GRAPH_DATA',
+    payload: request,
+  };
+}
+
+export function getAllAttendees(meetingId) {
+  const request = axios.get(`/api/meetings/${meetingId}`); // endpoint hasn't been created yet
+  return {
+    type: 'GET_ATTENDEEES',
+    payload: request,
+  };
+}
+
+export function createDepartment(department) {
+  const request = axios.post('api/departments', department);
+  return {
+    type: 'CREATE_DEPARTMENT',
     payload: request,
   };
 }
