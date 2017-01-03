@@ -1,6 +1,8 @@
-import { combineReducers } from 'redux';
+import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import LoginField from './login_reducer';
+import promise from 'redux-promise';
+import createLogger from 'redux-logger';
+import LoginReducer from './login_reducer';
 import UserForm from './addUser_reducer';
 import ClassMaker from './class_reducer';
 import GetClasses from './get_classes_reducer';
@@ -19,7 +21,7 @@ import GetAttendees from './get_attendees_reducer';
 import DepartmentForm from './addDepartment_reducer';
 
 const rootReducer = combineReducers({
-  login: LoginField,
+  user: LoginReducer,
   form: formReducer,
   addUser: UserForm,
   classes: ClassMaker,
@@ -39,4 +41,18 @@ const rootReducer = combineReducers({
   addDepartment: DepartmentForm,
 });
 
-export default rootReducer;
+const logger = createLogger();
+const store = createStore(rootReducer, applyMiddleware(promise, logger));
+
+if (window.localStorage.getItem('token')) {
+  store.dispatch({
+    type: 'LOGIN_SUBMITTED',
+    payload: {
+      data: {
+        token: window.localStorage.getItem('token'),
+      },
+    },
+  });
+}
+
+export { rootReducer, store };

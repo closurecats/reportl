@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import promise from 'redux-promise';
-import createLogger from 'redux-logger';
-import reducers from './reducers';
+import { store } from './reducers';
 
 import App from './components/app';
 import LoginField from './containers/login-field';
@@ -19,11 +16,9 @@ import RenderDepartments from './components/render_departments';
 import RenderGradeGraph from './components/render_grade_graph';
 import DepartmentForm from './containers/addDepartment';
 
-const logger = createLogger();
-
 ReactDOM.render(
 
-  <Provider store={createStore(reducers, applyMiddleware(promise, logger))}>
+  <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={LoginField} />
