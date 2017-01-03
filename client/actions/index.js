@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export function loginSubmit(login) {
-  const request = axios.post('/login', login);
+  const request = axios.post('/auth/login', login);
   return {
     type: 'LOGIN_SUBMITTED',
     payload: request,
