@@ -1,6 +1,8 @@
-import { combineReducers } from 'redux';
+import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import LoginField from './login_reducer';
+import promise from 'redux-promise';
+import createLogger from 'redux-logger';
+import LoginReducer from './login_reducer';
 import UserForm from './addUser_reducer';
 import ClassMaker from './class_reducer';
 import GetClasses from './get_classes_reducer';
@@ -29,4 +31,7 @@ const rootReducer = combineReducers({
   classInfo: UpdateClassInfo,
 });
 
-export default rootReducer;
+const logger = createLogger();
+const store = createStore(rootReducer, applyMiddleware(promise, logger));
+
+export { rootReducer, store };

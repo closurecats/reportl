@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import promise from 'redux-promise';
-import createLogger from 'redux-logger';
-import reducers from './reducers';
+import { store } from './reducers';
 // import routes from './routes';
 
 import App from './components/app';
@@ -17,12 +14,9 @@ import UpdateProfile from './containers/update_profile';
 import RenderProfile from './components/render_profile';
 import RenderClasses from './components/render_classes';
 
-
-const logger = createLogger();
-
 ReactDOM.render(
 
-  <Provider store={createStore(reducers, applyMiddleware(promise, logger))}>
+  <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={LoginField} />
