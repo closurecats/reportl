@@ -2,9 +2,9 @@ const Attendance = require('../models/attendanceModel');
 
 const attendanceController = {
   getByMeetingId({ params: { id } }, res) {
-    Attendance.forge({ id })
+    Attendance.forge({ meeting_id: id })
       .fetch({
-        withRelated: ['meeting'],
+        withRelated: ['user'],
       })
       .then((attendance) => {
         console.log(JSON.stringify(attendance));
@@ -15,7 +15,6 @@ const attendanceController = {
         res.sendStatus(500);
       });
   },
-
 };
 
 module.exports = attendanceController;
