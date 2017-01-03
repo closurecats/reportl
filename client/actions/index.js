@@ -132,3 +132,11 @@ export function getChartData() {
     payload: request,
   };
 }
+
+export function getAllAttendees(meetingId) {
+  const request = axios.get(`/api/meetings/${meetingId}`); // endpoint hasn't been created yet
+  return {
+    type: 'GET_ATTENDEEES',
+    payload: request,
+  };
+}
