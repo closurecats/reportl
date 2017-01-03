@@ -8,11 +8,11 @@ const LoginField = ({ handleSubmit }) => (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username</label>
-        <Field name="Class Name" component="input" type="text" />
+        <Field name="name" component="input" type="text" />
       </div>
       <div>
         <label htmlFor="password">Password</label>
-        <Field name="Start Date" component="input" type="password" />
+        <Field name="password" component="input" type="password" />
       </div>
       <button type="submit">Submit</button>
     </form>
