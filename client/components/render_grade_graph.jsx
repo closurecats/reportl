@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts';
+import Highcharts from 'highcharts';
+import drilldown from 'highcharts-drilldown';
 import { connect } from 'react-redux';
 import { getChartData } from '../actions/index';
 
@@ -7,18 +9,51 @@ class RenderGradeChart extends Component {
 
   componentWillMount() {
     this.props.getChartData();
+    drilldown(Highcharts);
+  }
+
+  componentWillUnmount() {
+    this.chart.destroy();
   }
 
   render() {
+    const nameObject = {};
+
+    this.props.gradeData.forEach((item) => {
+      if (nameObject[item.users.fullName] === undefined) {
+        nameObject[item.users.fullName] = [];
+      }
+      nameObject[item.users.fullName].push([item.gradeableobjects.objectName, item.grade]);
+    });
+
+    const highLevelData = [];
+    const lowLevelData = [];
+
+    Object.keys(nameObject).forEach((item) => {
+      console.log(nameObject[item])
+      lowLevelData.push({
+        name: item,
+        id: item,
+        data: nameObject[item].map(firstItem => firstItem),
+      });
+      highLevelData.push({
+        name: item,
+        y: Math.round(nameObject[item].reduce(function (a, b) {
+          return a + b[1];
+        }, 0) / nameObject[item].length),
+        drilldown: item,
+      });
+    });
+
     const config = {
       title: 'Grades',
       series: [{
         name: 'Grade Data',
-        data: this.props.gradeData.map(item => ({
-          name: item.users.fullName,
-          y: item.grade,
-        })),
+        data: highLevelData,
       }],
+      drilldown: {
+        series: lowLevelData,
+      },
       yAxis: [{
         title: 'Grades',
       }],
@@ -31,12 +66,16 @@ class RenderGradeChart extends Component {
       plotOptions: {
         series: {
           borderWidth: 2,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%',
+          },
         },
       },
     };
 
     return (
-      <ReactHighcharts config={config} />
+      <ReactHighcharts config={config}/>
     );
   }
 }
