@@ -13,14 +13,14 @@ const authController = {
         }
         return user.comparePassword(password);
       })
-      .then(user => jwt.sign(user, secret))
+      .then(user => jwt.sign(JSON.stringify(user), secret))
       .then(token => res.json({ token }))
       .catch(err => res.status(400).json(err));
   },
   register({ body: userData }, res) {
     User.forge({ userData })
       .save()
-      .then(user => jwt.sign(user, secret))
+      .then(user => jwt.sign(JSON.stringify(user), secret))
       .then(token => res.json({ token }))
       .catch(err => res.status(400).json(err));
   },
