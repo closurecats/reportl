@@ -13,6 +13,9 @@ const authController = {
         }
         return user.comparePassword(password);
       })
+      .then(user => user.refresh({
+        withRelated: ['type'],
+      }))
       .then(user => jwt.sign(JSON.stringify(user), secret))
       .then(token => res.json({ token }))
       .catch(err => res.status(400).json(err));
@@ -38,6 +41,9 @@ const authMiddleware = {
         resolve(decoded);
       });
     })
+    .then(user => user.refresh({
+      withRelated: ['type'],
+    }))
     .then((user) => {
       req.user = user;
     })
