@@ -31,6 +31,16 @@ const requireAuth = (nextState, replace) => {
   }
 };
 
+const requireAuthType = (nextState, replace, ...types) => {
+  const user = store.getState().user;
+  if (!isAuth || !!user.type || types.contains(user.type.name)) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname },
+    });
+  }
+};
+
 ReactDOM.render(
 
   <Provider store={store}>
