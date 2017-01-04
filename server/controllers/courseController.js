@@ -49,6 +49,18 @@ const courseController = {
         res.sendStatus(500);
       });
   },
+
+  deleteCourseById({ params: { id } }, res) {
+    Course.forge({ id })
+      .destroy()
+      .then(() => res.status(200).json({
+        status: 'success',
+      }))
+      .catch((err) => {
+        console.log(`courseController.deleteCourseById - Error: ${err}`);
+        res.sendStatus(500);
+      });
+  },
 };
 
 module.exports = courseController;
