@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const App = ({ children, user }) => {
   const isAuth = () => !!user.id;
-  const isAuthType = (...types) => isAuth() && !!user.type && types.contains(user.type.name);
+  const isAuthType = (...types) => isAuth() && !!user.type && types.includes(user.type.name);
 
   return (
     <div>

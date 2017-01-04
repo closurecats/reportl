@@ -33,7 +33,7 @@ const requireAuth = (nextState, replace) => {
 
 const requireAuthType = (nextState, replace, ...types) => {
   const user = store.getState().user;
-  if (!isAuth || !!user.type || types.contains(user.type.name)) {
+  if (!isAuth || !!user.type || types.includes(user.type.name)) {
     replace({
       pathname: '/',
       state: { nextPathname: nextState.location.pathname },
