@@ -17,6 +17,7 @@ const App = ({ children }) => (
       <button><Link to="/course">View All Classes for a Course</Link></button>
       <button><Link to="/createCourse">Create Course</Link></button>
       <button><Link to="/attendance">Take Attendance</Link></button>
+      <button><Link to="/calendar">View Calendar</Link></button>
     </div>
     <div>
       {children}

@@ -18,6 +18,7 @@ import DepartmentForm from './containers/addDepartment';
 import RenderClassesforCourse from './components/render_courses';
 import CourseForm from './containers/addCourse';
 import RenderAttendees from './components/attendance_student';
+import RenderCalendar from './components/render_calendar';
 
 ReactDOM.render(
 
@@ -37,6 +38,7 @@ ReactDOM.render(
         <Route path="/course" component={RenderClassesforCourse} />
         <Route path="/createCourse" component={CourseForm} />
         <Route path="/attendance" component={RenderAttendees} />
+        <Route path="/calendar" component={RenderCalendar} />
       </Route>
     </Router>
   </Provider>
