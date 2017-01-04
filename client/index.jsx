@@ -20,6 +20,17 @@ import CourseForm from './containers/addCourse';
 import RenderAttendees from './components/attendance_student';
 import RenderCalendar from './components/render_calendar';
 
+const isAuth = () => store.getState().user;
+
+const requireAuth = (nextState, replace) => {
+  if (!isAuth) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname },
+    });
+  }
+};
+
 ReactDOM.render(
 
   <Provider store={store}>
@@ -31,7 +42,7 @@ ReactDOM.render(
         <Route path="/classes" component={RenderClasses} />
         <Route path="/users" component={RenderUsers} />
         <Route path="/updateprofile" component={UpdateProfile} />
-        <Route path="/profile" component={RenderProfile} />
+        <Route path="/profile" component={RenderProfile} onEnter={requireAuth} />
         <Route path="/department" component={RenderDepartments} />
         <Route path="/gradegraph" component={RenderGradeGraph} />
         <Route path="/createDepartment" component={DepartmentForm} />
