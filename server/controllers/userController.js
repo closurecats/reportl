@@ -95,7 +95,7 @@ const userController = {
       })
       .then(user => res.json(user))
       .catch((err) => {
-        console.log(`userController.deleteUserById - Error: ${err}`);
+        console.log(`userController.updateUserById - Error: ${err}`);
         res.status(404).json({
           error: {
             message: 'Cannot delete user',
