@@ -13,6 +13,14 @@ const courseController = {
   //       res.sendStatus(500);
   //     });
   // },
+  getAll(req, res) {
+    Course.fetchAll()
+      .then(course => res.json(course))
+      .catch((err) => {
+        console.log(`courseController.getAll - Error: ${err}`);
+        res.sendStatus(500);
+      });
+  },
 
   getAllClass({ params: { id } }, res) {
     Course.forge({ id })
