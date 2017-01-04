@@ -20,7 +20,7 @@ import CourseForm from './containers/addCourse';
 import RenderAttendees from './components/attendance_student';
 import RenderCalendar from './components/render_calendar';
 
-const isAuth = () => store.getState().user;
+const isAuth = () => !!store.getState().user.id;
 
 const requireAuth = (nextState, replace) => {
   if (!isAuth) {
