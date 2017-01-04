@@ -125,6 +125,19 @@ const departmentController = {
         });
       });
   },
+
+  updateDepartmentById({ params: { id }, body: departmentData }, res) {
+    Department.forge({ id })
+      .fetch()
+      .then((department) => {
+        Object.keys(departmentData).forEach(key => department.set(key, departmentData[key]));
+        return department.save();
+      })
+      .then(department => res.json(department))
+      .catch((err) => {
+        console.log(`departmentController.updateDepartmentById - Error: ${err}`);
+      });
+  },
 };
 
 module.exports = departmentController;

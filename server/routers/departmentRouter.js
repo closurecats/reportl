@@ -12,6 +12,7 @@ router.get('/', departmentController.getAll);
 router.get('/:name/users', departmentController.getUsers);
 router.get('/:name/:type', departmentController.getUsersByType);
 router.get('/:id', departmentController.getDepartmentById);
+router.put('/:id', departmentController.updateDepartmentById);
 router.post('/', departmentController.newDepartment);
 
 module.exports = router;
