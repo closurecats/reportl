@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run db:empty --silent && npm run db:drop --silent && npm run build:test --silent && npm run eslint --silent",
-    "start": "npm run db:up && npm run build && node server/server.js",
+    "start": "npm run build && node server/server.js",
     "start:dev": "npm run db:up && ((sleep 3 && open http://localhost:8000) & concurrently -p '[{name}]' -c 'bgGreen.bold,bgBlue.bold' -n 'Webpack,Nodemon' 'npm run build:watch' 'npm run nodemon')",
     "build": "webpack && cp ./client/index.html ./dist/",
     "build:watch": "webpack --watch",
@@ -16,6 +16,7 @@
     "db:drop": "node scripts/db_clear.js",
     "db:empty": "npm run db:drop && npm run db:up",
     "db:seed": "knex --cwd ./server/database/ seed:run",
+    "db:reseed": "npm run db:empty && npm run db:seed",
     "db:migrate:make": "knex --cwd ./server/database/ migrate:make",
     "db:seed:make": "knex --cwd ./server/database/ seed:make",
     "db:version": "knex --cwd ./server/database/ migrate:currentVersion",
