@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=${DB_USER:-reportl}
+      - MYSQL_USER=${DB_USER:-reportl}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+  web:
+    build: .
+    ports:
+       - ${EXTERNAL_PORT:-80}:${PORT:-8000}
+    links:
+      - mysql:${DB_HOST:-database}
+    environment:
+      - NODE_ENV=production
