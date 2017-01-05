@@ -227,7 +227,9 @@ export function makeNewModule(moduleInfo) {
 }
 
 export function searchCalendar(calendarSpan) {
-  const request = axios.post('api/calendar', calendarSpan);
+  const request = axios.get('api/calendar/interval', {
+    params: calendarSpan,
+  });
   return {
     type: 'SEARCH_CALENDAR',
     payload: request,
