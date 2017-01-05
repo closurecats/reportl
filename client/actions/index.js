@@ -178,8 +178,8 @@ export function createDepartment(department) {
   };
 }
 
-export function getCourseDetails() {
-  const request = axios.get('api/courses/3');
+export function getCourseDetails(id) {
+  const request = axios.get(`api/courses/${id}`);
   return {
     type: 'GET_CLASSES_FOR_COURSE',
     payload: request,
@@ -211,7 +211,6 @@ export function getAllCalendarEvents() {
 }
 
 export function addStudentsToClass(student) {
-  console.log('Adding Student to Class', student);
   const request = axios.post('api/students_classes', student);
   return {
     type: 'ADD_STUDENT_TO_CLASS',
@@ -220,10 +219,17 @@ export function addStudentsToClass(student) {
 }
 
 export function makeNewModule(moduleInfo) {
-  console.log('Adding Module to Class', moduleInfo);
   const request = axios.post('api/modules', moduleInfo);
   return {
     type: 'ADD_MODULE_TO_CLASS',
+    payload: request,
+  };
+}
+
+export function searchCalendar(calendarSpan) {
+  const request = axios.post('api/calendar', calendarSpan);
+  return {
+    type: 'SEARCH_CALENDAR',
     payload: request,
   };
 }

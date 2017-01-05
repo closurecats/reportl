@@ -4,6 +4,7 @@ exports.up = knex => knex.schema.createTable('classes', (table) => {
   table.integer('course_id').unsigned();
   table.string('name');
   table.integer('size');
+  table.string('location');
   table.boolean('monday').defaultTo(false);
   table.boolean('tuesday').defaultTo(false);
   table.boolean('wednesday').defaultTo(false);

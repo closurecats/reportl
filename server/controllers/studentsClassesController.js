@@ -3,7 +3,7 @@ const StudentsClasses = require('../models/studentsClassesModel');
 const studentsClassesController = {
 
   addStudentToClass({ body }, res) {
-    console.log('moduleData', body);
+    console.log('studentClassData', body);
     StudentsClasses.forge(body)
       .save()
       .then((studentIdResponse) => {

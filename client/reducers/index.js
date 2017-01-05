@@ -26,6 +26,7 @@ import StudentClassPair from './add_student_to_class_reducer';
 import ModuleMaker from './add_module_to_class';
 import SelectedClassInformation from './get_classes_by_id';
 import AllCourses from './get_all_courses_reducer';
+import SearchCalendar from './search_calendar_reducer';
 
 const rootReducer = combineReducers({
   user: LoginReducer,
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
   addedModule: ModuleMaker,
   selectedClass: SelectedClassInformation,
   allCourses: AllCourses,
+  calendarSearchResult: SearchCalendar,
 });
 
 const logger = createLogger();

@@ -50,3 +50,26 @@ const User = db.Model.extend({
 });
 
 module.exports = db.model('User', User);
+
+if (process.env.NODE_ENV !== 'production') {
+  User.forge({
+    name: 'test',
+  })
+  .fetch()
+  .then((user) => {
+    if (user) {
+      console.log('Deleting test user');
+      return user.destroy();
+    }
+    console.log('No test user');
+    return false;
+  })
+  .then(() => User.forge({
+    name: 'test',
+    password: 'test',
+    typeId: 1,
+  }).save())
+  .then(() => {
+    console.log('Created test user');
+  });
+}

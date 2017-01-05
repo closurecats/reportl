@@ -15,6 +15,9 @@ const Class = db.Model.extend({
   users() {
     return this.belongsToMany('User', 'students_classes', 'class_id', 'student_id');
   },
+  teacher() {
+    return this.belongsTo('User', 'teacher_id');
+  },
 });
 
 module.exports = db.model('Class', Class);

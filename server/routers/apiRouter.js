@@ -13,6 +13,7 @@ const meetingsRouter = require('./meetingsRouter');
 const calendarRouter = require('./calendarRouter');
 const attendanceRouter = require('./attendanceRouter');
 const studentClassesRouter = require('./studentClassesRouter');
+const teacherClassesRouter = require('./teacherClassesRouter');
 
 if (process.env.NODE_ENV !== 'production') {
   router.all('*', (req, res, next) => {
@@ -107,6 +108,13 @@ router.use('/students_classes', (req, res, next) => {
   }
   next();
 }, studentClassesRouter);
+
+router.use('/teachers_classes', (req, res, next) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('apiRouter -> teacherClassesRouter');
+  }
+  next();
+}, teacherClassesRouter);
 
 
 module.exports = router;

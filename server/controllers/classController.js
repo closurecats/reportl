@@ -6,7 +6,7 @@ const classController = {
   getClassById({ params: { id } }, res) {
     Class.forge({ id })
       .fetch({
-        withRelated: ['course', 'modules'],
+        withRelated: ['course', 'modules', 'users', 'teacher'],
       })
       .then((clas) => {
         console.log(JSON.stringify(clas));

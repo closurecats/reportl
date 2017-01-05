@@ -16,7 +16,7 @@ const gradeableObjectController = {
 
   getAll(req, res) {
     GradeableObjectModel.fetchAll({
-      withRelated: ['module', 'type'],
+      withRelated: ['module', 'type', 'file', 'meeting'],
     })
     .then(gradeableobjects => res.json(gradeableobjects))
     .catch((err) => {

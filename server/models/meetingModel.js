@@ -1,6 +1,7 @@
 const db = require('../database/db');
 require('./classModel');
 require('./calendarModel');
+require('./gradeableObjectModel');
 
 const Meeting = db.Model.extend({
   tableName: 'meetings',
@@ -10,6 +11,9 @@ const Meeting = db.Model.extend({
   },
   calendarDay() {
     return this.belongsTo('Calendar');
+  },
+  gradeable_objects() {
+    return this.hasMany('GradeableObjectModel', 'meeting_id');
   },
 });
 

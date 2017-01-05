@@ -1,21 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import FormList from '../containers/class_builder_forms/class_form_list';
-// import FormDetail from '../containers/class_builder_forms/class_form_detail';
+import { Link } from 'react-router';
 import { getDepartmentInformation } from '../actions/index';
 
 class RenderCourseCatalog extends Component {
   componentWillMount() {
-    getDepartmentInformation();
+    this.props.getDepartmentInformation();
   }
 
+  renderDepartments() {
+    return this.props.departments.map(department => (
+      <div key={department.id} >
+        <li><button><Link to="/coursecatalog/department">{department.name}</Link>
+        </button></li>
+      </div>
+    ));
+  }
+  render() {
+    return (
+      <div>
+        <div>
+          <h3>Departments</h3>
+          <ul>
+            {this.renderDepartments()}
+          </ul>
+        </div>
+        <div>
+          {this.props.children}
+        </div>
+      </div>
+    );
+  }
 
 }
 
 RenderCourseCatalog.propTypes = {
   getDepartmentInformation: React.PropTypes.func,
   departments: React.PropTypes.arrayOf(React.PropTypes.string),
+  children: React.PropTypes.element,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -23,9 +46,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return {
-    classId: state.classId,
-  };
+  return { departments: state.departments };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RenderCourseCatalog);
