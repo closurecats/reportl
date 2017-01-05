@@ -6,20 +6,20 @@ const SearchCalendar = ({ handleSubmit }) => (
   <div>
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="day_of_month">From Day</label>
-        <Field name="day_of_month" label="From Day" component="input" type="number" />
+        <label htmlFor="fromDay">From Day</label>
+        <Field name="from_day_of_month" label="From Day" component="input" type="number" />
       </div>
       <div>
-        <label htmlFor="month">Month</label>
-        <Field name="month" component="input" type="text" />
+        <label htmlFor="fromMonth">Month</label>
+        <Field name="from_month" component="input" type="text" />
       </div>
       <div>
-        <label htmlFor="day_of_month">To Day</label>
-        <Field name="day_of_month" label="From Day" component="input" type="number" />
+        <label htmlFor="toDay">To Day</label>
+        <Field name="to_day_of_month" label="From Day" component="input" type="number" />
       </div>
       <div>
-        <label htmlFor="month">Month</label>
-        <Field name="month" component="input" type="text" />
+        <label htmlFor="toMonth">Month</label>
+        <Field name="to_month" component="input" type="text" />
       </div>
       <button type="submit">Submit</button>
     </form>

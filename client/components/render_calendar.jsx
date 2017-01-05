@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllCalendarEvents } from '../actions/index';
+import SearchCalendar from '../containers/getCalendarDays';
 
 class RenderCalendar extends Component {
 
   componentWillMount() {
     this.props.getAllCalendarEvents();
+  }
+
+  renderSearchResults() {
+    return this.props.calendarSearchResult.map(eachResultDay => (
+      <div>{eachResultDay}</div>
+    ));
   }
 
   renderCalendar() {
@@ -27,6 +34,7 @@ class RenderCalendar extends Component {
     return (
       <div>
         <h2>Calendar Events</h2>
+        <SearchCalendar />
         {this.renderCalendar()}
       </div>
     );
@@ -36,6 +44,7 @@ class RenderCalendar extends Component {
 RenderCalendar.propTypes = {
   getAllCalendarEvents: React.PropTypes.func,
   calendarData: React.PropTypes.arrayOf(React.PropTypes.object),
+  calendarSearchResult: React.PropTypes.arrayOf(React.PropTypes.object),
 };
 
 function mapStateToProps(state) {
