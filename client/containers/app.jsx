@@ -23,7 +23,6 @@ const App = ({ children, user }) => {
         {isAuthType('teacher') && <button><Link to="/createCourse">Create Course</Link></button>}
         {isAuthType('teacher') && <button><Link to="/attendance">Take Attendance</Link></button>}
         {isAuthType('teacher', 'student') && <button><Link to="/calendar">View Calendar</Link></button>}
-        {isAuthType() && <button><Link to="/calendar/search">search Calendar</Link></button>}
       </div>
       <div>
         {children}
