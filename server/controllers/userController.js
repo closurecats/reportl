@@ -90,10 +90,12 @@ const userController = {
         Object.keys(userData).forEach((key) => {
           user.set(key, userData[key]);
         });
-        res.json(user);
+
+        return user.save();
       })
+      .then(user => res.json(user))
       .catch((err) => {
-        console.log(`userController.deleteUserById - Error: ${err}`);
+        console.log(`userController.updateUserById - Error: ${err}`);
         res.status(404).json({
           error: {
             message: 'Cannot delete user',

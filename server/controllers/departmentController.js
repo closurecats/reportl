@@ -28,13 +28,18 @@ const departmentController = {
   },
 
   getUsersByType({ params: { type, name }, baseUrl, originalUrl }, res, next) {
-    if (isNaN(name)) {
+    if (!isNaN(name)) {
+      next();
+    } else {
       UserType.forge({
         name: type,
       }).fetch()
       .then((userType) => {
-        if (userType) {
-          return Department.forge({ name }).fetch({
+        if (!userType) {
+          return Promise.reject('invalid user type');
+        }
+        return Department.forge({ name })
+          .fetch({
             withRelated: [
               {
                 users(qb) {
@@ -43,11 +48,13 @@ const departmentController = {
               },
             ],
           });
-        }
-
+      })
+      .then(department => res.json(department))
+      .catch((err) => {
+        console.log(`departmentController.getUsersByType - Error: ${err}`);
         res.status(404).json({
           error: {
-            message: 'Not a valid user type',
+            message: typeof err === 'string' ? err : null,
           },
           request: {
             endpoint: baseUrl,
@@ -58,34 +65,7 @@ const departmentController = {
             },
           },
         });
-
-        // FIXME: temp fix to not send twice
-        return 'no';
-      })
-      .then((department) => {
-        if (department) {
-          if (department !== 'no') {
-            res.json(department);
-          }
-        } else {
-          res.status(404).json({
-            error: {
-              message: 'Not a valid department',
-            },
-            request: {
-              endpoint: baseUrl,
-              url: originalUrl,
-              parameters: {
-                type,
-                name,
-              },
-            },
-          });
-        }
       });
-    } else {
-      console.log('test', type, name);
-      next();
     }
   },
 
@@ -145,6 +125,19 @@ const departmentController = {
             content: departmentData,
           },
         });
+      });
+  },
+
+  updateDepartmentById({ params: { id }, body: departmentData }, res) {
+    Department.forge({ id })
+      .fetch()
+      .then((department) => {
+        Object.keys(departmentData).forEach(key => department.set(key, departmentData[key]));
+        return department.save();
+      })
+      .then(department => res.json(department))
+      .catch((err) => {
+        console.log(`departmentController.updateDepartmentById - Error: ${err}`);
       });
   },
 };
