@@ -6,32 +6,26 @@ require('dotenv').config({
   silent: true,
 });
 
+const client = 'mysql';
+const connection = {
+  host: process.env.DB_HOST || 'database',
+  user: process.env.DB_USER || 'reportl',
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE || 'reportl',
+};
+
+const migrations = {
+  tableName: 'knex_migrations',
+};
+
 module.exports = {
   development: {
-    client: 'mysql',
-    connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-    },
+    client,
+    connection,
+    migrations,
     pool: {
       max: 1,
     },
   },
-  production: {
-    client: 'mysql',
-    connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-    },
-  },
+  production: { client, connection, migrations },
 };
