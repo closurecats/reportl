@@ -1,27 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { getAllAttendees } from '../actions/index';
+import { getAllAttendees, getMeetingById } from '../actions/index';
 
-const MeetingForm = ({ handleSubmit }) => (
-  <div>
-    <h2>Select a Meeting</h2>
-    <form onSubmit={handleSubmit}>
+class MeetingForm extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = { meetingId: '' };
+  }
+
+
+  onInputChange(meetingId) {
+    this.setState({ meetingId });
+  }
+
+  render() {
+    return (
       <div>
-        <label htmlFor="meeting">Id:</label>
-        <Field name="meeting" component="input" type="number" />
+        <h2>Select a Meeting</h2>
+        <div>
+          <label htmlFor="meeting">Id:</label>
+          <input
+            name="meeting"
+            type="number"
+            value={this.state.meetingId}
+            onChange={event => this.onInputChange(event.target.value)}
+          />
+        </div>
+        <button
+          onClick={
+            () => {
+              this.props.getAllAttendees(this.state.meetingId);
+              this.props.getMeetingById(this.state.meetingId);
+            }
+          }
+        >Submit</button>
       </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-);
+    );
+  }
+}
 
 MeetingForm.propTypes = {
-  handleSubmit: React.PropTypes.func,
+  getAllAttendees: React.PropTypes.func,
+  getMeetingById: React.PropTypes.func,
 };
 
-const MeetingFormMaker = reduxForm({
-  form: 'setMeeting',
-})(MeetingForm);
+function mapStateToProps(state) {
+  return { attendees: state.attendees, meeting: state.meeting };
+}
 
-export default connect(() => ({}), { onSubmit: getAllAttendees })(MeetingFormMaker);
+export default connect(mapStateToProps, { getAllAttendees, getMeetingById })(MeetingForm);

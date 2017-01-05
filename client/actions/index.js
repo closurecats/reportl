@@ -153,9 +153,7 @@ export function getChartData() {
 
 export function getAllAttendees(meetingId) {
   console.log('meetingId: ', meetingId);
-  const id = meetingId.meeting;
-  console.log('id: ', id);
-  const request = axios.get(`/api/attendance/meeting/${id}`);
+  const request = axios.get(`/api/attendance/meeting/${meetingId}`);
   return {
     type: 'GET_ATTENDEES',
     payload: request,
@@ -163,7 +161,8 @@ export function getAllAttendees(meetingId) {
 }
 
 export function markPresent(attendanceId) {
-  const request = axios.put(`/api/${attendanceId}`); // placeholder
+  console.log('hit markPresent!');
+  const request = axios.put(`/api/attendance/${attendanceId}`); // placeholder
   return {
     type: 'MARK_PRESENT',
     payload: request,
@@ -232,6 +231,14 @@ export function searchCalendar(calendarSpan) {
   });
   return {
     type: 'SEARCH_CALENDAR',
+    payload: request,
+  };
+}
+
+export function getMeetingById(meetingId) {
+  const request = axios.get(`api/meetings/${meetingId}`);
+  return {
+    type: 'GET_MEETING',
     payload: request,
   };
 }

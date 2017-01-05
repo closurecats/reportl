@@ -16,7 +16,7 @@ import RenderDepartments from './components/render_departments';
 import RenderGradeGraph from './components/render_grade_graph';
 import DepartmentForm from './containers/addDepartment';
 import CourseForm from './containers/addCourse';
-import RenderAttendees from './components/attendance_student';
+import RenderLesson from './components/render_lesson';
 import RenderCalendar from './components/render_calendar';
 import RenderCourseCatalog from './components/render_course_catalog';
 import RenderClassesforCourse from './components/render_courses';
@@ -68,7 +68,7 @@ ReactDOM.render(
         />
         <Route path="/course" component={RenderClassesforCourse} />
         <Route path="/createCourse" component={CourseForm} />
-        <Route path="/attendance" component={RenderAttendees} />
+        <Route path="/lesson" component={RenderLesson} />
         <Route path="/calendar" component={RenderCalendar} />
         <Route path="/coursecatalog" component={RenderCourseCatalog} />
         <Route path="/coursecatalog/department" component={RenderDepartments} />

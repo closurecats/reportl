@@ -14,7 +14,9 @@ const meetingsController = {
 
   getMeetingById({ params: { id }, baseUrl, originalUrl }, res) {
     Meeting.forge({ id })
-      .fetch()
+      .fetch({
+        withRelated: ['class', 'gradeable_objects'],
+      })
       .then((meeting) => {
         if (meeting) {
           res.json(meeting);

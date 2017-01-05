@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { markPresent } from '../actions/index';
+import { getAllAttendees, markPresent } from '../actions/index';
 import MeetingFormMaker from '../containers/setMeeting';
 
 const containerStyle = {
@@ -8,10 +9,22 @@ const containerStyle = {
   flexWrap: 'wrap',
 };
 
-const cardStyle = {
+const greenCardStyle = {
   display: 'block',
   borderStyle: 'solid',
-  backgroundColor: 'white',
+  backgroundColor: 'green',
+  height: '250px',
+  width: '220px',
+  margin: '10px',
+  boxShadow: '10px 10px 5px lightgrey',
+  borderWidth: 'thin',
+  fontSize: 'x-large',
+};
+
+const redCardStyle = {
+  display: 'block',
+  borderStyle: 'solid',
+  backgroundColor: 'red',
   height: '250px',
   width: '220px',
   margin: '10px',
@@ -26,17 +39,21 @@ const thumbnailStyle = {
 };
 
 class RenderAttendees extends Component {
-
   RenderAttendees() {
     console.log('props: attendees: ', this.props.attendees);
     return this.props.attendees.map(eachAttendee => (
       <button
         onClick={() => {
-          markPresent(eachAttendee.id); // placeholder
+          markPresent(eachAttendee.id);
+          setTimeout(() => getAllAttendees({ meeting: eachAttendee.meetingId }), 500);
         }}
-        style={cardStyle}
+        style={eachAttendee.present === 0 ? greenCardStyle : redCardStyle}
       >
-        <img style={thumbnailStyle} alt="Attendee" src="http://localhost:8000/api/files/1" />
+        <img
+          style={thumbnailStyle}
+          alt="Attendee"
+          src="http://localhost:8000/api/files/1"
+        />
         {/* <img alt="Attendee" src={eachAttendee.user.imgUrl} />   */}
         <div>{eachAttendee.user.fullName}</div>
       </button>
@@ -57,6 +74,10 @@ RenderAttendees.propTypes = {
   attendees: React.PropTypes.arrayOf(React.PropTypes.object),
 };
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getAllAttendees }, dispatch);
+}
+
 function mapStateToProps(state) {
   console.log('state in mapStateToProps: ', state);
   return {
@@ -64,4 +85,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RenderAttendees);
+export default connect(mapStateToProps, mapDispatchToProps)(RenderAttendees);
