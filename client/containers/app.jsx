@@ -9,6 +9,7 @@ const App = ({ children, user }) => {
   return (
     <div>
       <div>
+        {(isAuth() && `Welcome: ${user.name} | ID: ${user.id}`) || 'No user'}
         {!isAuth() && <button><Link to="/">Login</Link></button>}
         {isAuth() && <button><Link to="/class">Class Builder</Link></button>}
         {isAuth() && <button><Link to="/user">Create User</Link></button>}
