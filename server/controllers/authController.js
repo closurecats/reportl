@@ -45,14 +45,18 @@ const authMiddleware = {
         resolve(decoded);
       });
     })
-    .then(user => user.refresh({
-      withRelated: ['type'],
-    }))
+    .then(user => User.forge({ id: user.id }).fetch({ withRelated: ['type'] }))
     .then((user) => {
+      if (!user) {
+        return Promise.reject();
+      }
       req.user = user;
+      return jwt.sign(JSON.stringify(user), secret);
     })
+    .then(newToken => res.set(tokenName, newToken))
     .catch(() => {
       req.user = false;
+      return true;
     })
     .then(() => next());
   },
