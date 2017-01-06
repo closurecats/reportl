@@ -62,15 +62,4 @@ const rootReducer = combineReducers({
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(promise, logger));
 
-if (window.localStorage.getItem('token')) {
-  store.dispatch({
-    type: 'LOGIN_SUBMITTED',
-    payload: {
-      data: {
-        token: window.localStorage.getItem('token'),
-      },
-    },
-  });
-}
-
 export { rootReducer, store };
