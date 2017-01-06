@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
 const secret = 'not a secret' || process.env.SECRET;
+const tokenName = 'x-auth-token';
 
 const authController = {
   check({ user }, res) {
@@ -20,21 +21,21 @@ const authController = {
         withRelated: ['type'],
       }))
       .then(user => jwt.sign(JSON.stringify(user), secret))
-      .then(token => res.json({ token }))
-      .catch(err => res.status(400).json(err));
+      .then(token => res.set(tokenName, token).json({ status: 'success' }))
+      .catch(() => res.set(tokenName, false).status(401).json({ status: 'error' }));
   },
   register({ body: userData }, res) {
     User.forge(userData)
       .save()
       .then(user => jwt.sign(JSON.stringify(user), secret))
-      .then(token => res.json({ token }))
+      .then(token => res.set(tokenName, token).json({ status: 'success' }))
       .catch(err => res.status(400).json(err));
   },
 };
 
 const authMiddleware = {
   userInject(req, res, next) {
-    const token = req.headers['x-auth-token'];
+    const token = req.headers[tokenName];
 
     new Promise((resolve, reject) => {
       jwt.verify(token, secret, (err, decoded) => {
