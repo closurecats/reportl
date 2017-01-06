@@ -259,3 +259,6 @@ axios.interceptors.response.use((res) => {
   store.dispatch(auth(err.response.headers[tokenName]));
   return Promise.reject(err);
 });
+
+store.dispatch(auth(window.localStorage.getItem('token') || false));
+axios.get('auth/check');
