@@ -240,3 +240,22 @@ export function getMeetingById(meetingId) {
     payload: request,
   };
 }
+
+const tokenName = 'x-auth-token';
+
+axios.interceptors.request.use((config) => {
+  const token = store.getState().user.token;
+  config.headers[tokenName] = token || false;
+
+  return config;
+}, err => Promise.reject(err));
+
+axios.interceptors.response.use((res) => {
+  const token = res.headers[tokenName];
+  store.dispatch(auth(token));
+
+  return res;
+}, (err) => {
+  store.dispatch(auth(err.response.headers[tokenName]));
+  return Promise.reject(err);
+});
