@@ -1,8 +1,11 @@
 {
   "extends": "airbnb",
-  "globals": {
-    "document": true,
-    "window": true,
-    "FormData": true
+  "rules": {
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ]
   }
 }

@@ -1,0 +1,10 @@
+{
+  "globals": {
+    "document": true,
+    "window": true,
+    "FormData": true
+  },
+  "rules": {
+    "no-console": 0,
+  },
+}
