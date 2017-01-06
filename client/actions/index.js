@@ -1,14 +1,6 @@
 import axios from 'axios';
 import { store } from '../reducers/';
 
-const tokenListener = () => {
-  const token = store.getState().user.token;
-
-  if (token) {
-    axios.defaults.headers.common['x-auth-token'] = token;
-  }
-};
-store.subscribe(tokenListener);
 
 export function loginSubmit(login) {
   const request = axios.post('/auth/login', login);
