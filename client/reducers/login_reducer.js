@@ -1,15 +1,20 @@
-export default function (state = {}, action) {
+const parseToken = jwt => JSON.parse(window.atob(jwt.split('.')[1].replace('-', '+').replace('_', '/')));
+
+export default function (state = { id: 0 }, action) {
   switch (action.type) {
-    case 'LOGIN_SUBMITTED': {
-      const token = action.payload.data.token;
-      let userData = {};
+    case 'AUTHENTICATE': {
+      const token = action.payload;
+
       if (token) {
-        userData = JSON.parse(window.atob(token.split('.')[1].replace('-', '+').replace('_', '/')));
+        const userData = parseToken(token);
         userData.token = token;
         window.localStorage.setItem('token', token);
+
+        return userData;
       }
 
-      return userData;
+      window.localStorage.removeItem('token');
+      return { id: 0 };
     }
     default:
       return state;
