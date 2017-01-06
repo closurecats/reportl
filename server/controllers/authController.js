@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 const secret = 'not a secret' || process.env.SECRET;
 
 const authController = {
+  check({ user }, res) {
+    res.json({ loggedIn: !!user });
+  },
   login({ body: { name, password } }, res) {
     User.forge({ name })
       .fetch()

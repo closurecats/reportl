@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+router.get('/check', authController.check);
 router.post('/login', authController.login);
 router.post('/register', authController.register);
 
