@@ -11,14 +11,15 @@ class RenderProfile extends Component {
     return (
       <div>
         <h2>Profile</h2>
-        <div>
-          {this.props.profile.image}
-          {this.props.profile.email}
-          {this.props.profile.description}
-          {this.props.profile.address}
-          {this.props.profile.phone}
-          {this.props.profile.dob}
-        </div>
+        <ul>
+          <li>{this.props.profile.fullName}</li>
+          <li>{this.props.profile.image}</li>
+          <li>{this.props.profile.email}</li>
+          <li>{this.props.profile.description}</li>
+          <li>{this.props.profile.address}</li>
+          <li>{this.props.profile.phone}</li>
+          <li>{this.props.profile.dob}</li>
+        </ul>
       </div>
     );
   }
@@ -27,6 +28,7 @@ class RenderProfile extends Component {
 RenderProfile.propTypes = {
   getProfileInformation: React.PropTypes.func,
   profile: React.PropTypes.shape({
+    fullName: React.PropTypes.string,
     image: React.PropTypes.string,
     email: React.PropTypes.string,
     description: React.PropTypes.string,

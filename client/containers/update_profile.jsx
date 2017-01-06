@@ -23,11 +23,11 @@ const UpdateProfile = ({ handleSubmit }) => (
       </div>
       <div>
         <label htmlFor="Add your phone number">Phone</label>
-        <Field name="phone" component="input" type="tel" />
+        <Field name="phoneNumber" component="input" type="tel" />
       </div>
       <div>
         <label htmlFor="Add your date of birth">Date of Birth</label>
-        <Field name="dob" component="input" type="text" />
+        <Field name="dateOfBirth" component="input" type="date" />
       </div>
       <button type="submit">Submit</button>
     </form>

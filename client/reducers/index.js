@@ -8,7 +8,7 @@ import ClassMaker from './class_reducer';
 import GetClasses from './get_classes_reducer';
 import GetUsers from './get_users_reducer';
 import UpdateProfile from './profile_reducer';
-import GetProfile from './view_profile';
+import GetProfile from './view_profile_reducer';
 import GetForms from './classforms_reducer';
 import GetClassId from './add_classid_reducer';
 import UpdateClassInfo from './update_class_reducer';
