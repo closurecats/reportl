@@ -12,10 +12,6 @@ class RenderGradeChart extends Component {
     drilldown(Highcharts);
   }
 
-  componentWillUnmount() {
-    this.chart.destroy();
-  }
-
   render() {
     const nameObject = {};
 

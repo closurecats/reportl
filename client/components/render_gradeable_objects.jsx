@@ -7,7 +7,7 @@ class RenderGradeables extends Component {
     return this.props.gradeables.map(eachObj => (
       <div>
         <div key={eachObj.objectName}>
-          <div>{eachObj.objectName}</div>
+          <div>Name: {eachObj.objectName}</div>
         </div>
       </div>
     ));
@@ -16,6 +16,7 @@ class RenderGradeables extends Component {
   render() {
     return (
       <div>
+        <h3>Assignments</h3>
         {this.renderGradeables()}
       </div>
     );
@@ -29,7 +30,7 @@ RenderGradeables.propTypes = {
 function mapStateToProps(state) {
   console.log('state in mapStateToProps: ', state);
   return {
-    gradeables: state.meeting.gradeable_objects,
+    gradeables: state.meeting.gradeable_objects || [],
   };
 }
 

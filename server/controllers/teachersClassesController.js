@@ -16,6 +16,18 @@ const teachersClassesController = {
       });
   },
 
+  getClassByTeacherId({ params: { teacher_id } }, res) {
+    TeachersClasses.forge({ teacher_id })
+      .fetch({
+        withRelated: ['class'],
+      })
+      .then(userClasses => res.json(userClasses))
+      .catch((err) => {
+        console.log(`userController.getClassByTeacherId - Error: ${err}`);
+        res.sendStatus(500);
+      });
+  },
+
   getTeacherByClassId({ params: { class_id } }, res) {
     TeachersClasses.forge({ class_id })
       .fetch({

@@ -11,20 +11,16 @@ const App = ({ children, user }) => {
       <div>
         {(isAuth() && `Welcome: ${user.name} | ID: ${user.id}`) || 'No user'}
         {!isAuth() && <button><Link to="/">Login</Link></button>}
-        {isAuth() && <button><Link to="/class">Class Builder</Link></button>}
-        {isAuth() && <button><Link to="/user">Create User</Link></button>}
         {isAuthType('student', 'teacher') && <button><Link to="/classes">View All Classes</Link></button>}
         {isAuth() && <button><Link to="/users">View All Users</Link></button>}
         {isAuthType('student', 'teacher') && <button><Link to="/updateprofile">Create Profile</Link></button>}
         {isAuthType('student', 'teacher') && <button><Link to="/profile">View Profile</Link></button>}
         {isAuthType('student', 'teacher') && <button><Link to="/coursecatalog">View Course Catalog</Link></button>}
         {isAuthType('teacher') && <button><Link to="/gradegraph">View Grades</Link></button>}
-        {isAuthType('teacher') && <button><Link to="/createDepartment">Create Department</Link></button>}
-        {isAuthType('teacher', 'student') && <button><Link to="/course">View All Classes for a Course</Link></button>}
-        {isAuthType('teacher') && <button><Link to="/createCourse">Create Course</Link></button>}
         {isAuthType('teacher') && <button><Link to="/lesson">View Lesson</Link></button>}
         {isAuthType('teacher', 'student') && <button><Link to="/calendar">View Calendar</Link></button>}
         {isAuthType('teacher', 'student') && <button><Link to="/dashboard">View My Dashboard</Link></button>}
+        {isAuthType('teacher') && <button><Link to="/createform">Create Form</Link></button>}
       </div>
       <div>
         {children}

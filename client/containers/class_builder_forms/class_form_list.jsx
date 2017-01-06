@@ -32,7 +32,7 @@ class FormList extends Component {
   render() {
     return (
       <div>
-        <h2>This is the Form List</h2>
+        <h2>Class Builder</h2>
         <ol>
           {this.renderList()}
         </ol>

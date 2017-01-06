@@ -45,7 +45,7 @@ const classController = {
 
   getAll(req, res) {
     Class.fetchAll({
-      withRelated: ['course', 'modules', 'users'],
+      withRelated: ['course', 'modules', 'users', 'meetings'],
     })
     .then(classes => res.json(classes))
     .catch((err) => {

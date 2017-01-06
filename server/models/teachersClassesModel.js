@@ -5,7 +5,7 @@ const TeachersClasses = db.Model.extend({
   tableName: 'teachers_classes',
   hasTimestamps: true,
   class() {
-    return this.belongsTo('Class', 'class_id');
+    return this.hasMany('Class', 'teacher_id');
   },
 });
 

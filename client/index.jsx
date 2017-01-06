@@ -13,15 +13,16 @@ import UpdateProfile from './components/render_profile_builder';
 import RenderProfile from './components/render_profile';
 import RenderClasses from './components/render_classes';
 import RenderDepartments from './components/render_departments';
-import RenderGradeGraph from './components/render_grade_graph';
+import RenderGradeChartByUser from './components/render_grade_graph_by_user';
 import DepartmentForm from './containers/addDepartment';
 import CourseForm from './containers/addCourse';
-import RenderAttendees from './components/attendance_student';
+import RenderLesson from './components/render_lesson';
 import RenderCalendar from './components/render_calendar';
 import RenderCourseCatalog from './components/render_course_catalog';
 import RenderClassesforCourse from './components/render_courses';
 import RenderSingleClass from './components/render_single_class';
 import renderDailySchedule from './containers/myDailySchedule';
+import CreateForm from './components/create_all_forms';
 
 const isAuth = () => !!store.getState().user.id;
 
@@ -62,7 +63,7 @@ ReactDOM.render(
         />
         <Route path="/dashboard" component={renderDailySchedule} />
         <Route path="/department" component={RenderDepartments} />
-        <Route path="/gradegraph" component={RenderGradeGraph} />
+        <Route path="/gradegraph" component={RenderGradeChartByUser} />
         <Route
           path="/createDepartment"
           component={DepartmentForm}
@@ -70,12 +71,13 @@ ReactDOM.render(
         />
         <Route path="/course" component={RenderClassesforCourse} />
         <Route path="/createCourse" component={CourseForm} />
-        <Route path="/attendance" component={RenderAttendees} />
+        <Route path="/lesson" component={RenderLesson} />
         <Route path="/calendar" component={RenderCalendar} />
         <Route path="/coursecatalog" component={RenderCourseCatalog} />
         <Route path="/coursecatalog/department" component={RenderDepartments} />
         <Route path="/coursecatalog/department/course" component={RenderClassesforCourse} />
         <Route path="/coursecatalog/department/course/class" component={RenderSingleClass} />
+        <Route path="/createform" component={CreateForm} />
       </Route>
     </Router>
   </Provider>
