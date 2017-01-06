@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { store } from '../reducers/';
 
+export function auth(token = false) {
+  return {
+    type: 'AUTHENTICATE',
+    payload: token,
+  };
+}
 
 export function loginSubmit(login) {
   const request = axios.post('/auth/login', login);
