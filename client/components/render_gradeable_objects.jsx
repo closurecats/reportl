@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getAllAttendees } from '../actions/index';
 
 class RenderGradeables extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userGrades: {},
+    };
+  }
+
   renderGradeables() {
     console.log('props: gradeables: ', this.props.gradeables);
     return this.props.gradeables.map(eachObj => (
@@ -16,7 +26,7 @@ class RenderGradeables extends Component {
   render() {
     return (
       <div>
-        <h3>Assignments</h3>
+        <h3>Assignments/Exams</h3>
         {this.renderGradeables()}
       </div>
     );
@@ -24,6 +34,7 @@ class RenderGradeables extends Component {
 }
 
 RenderGradeables.propTypes = {
+  attendees: React.PropTypes.arrayOf(React.PropTypes.object),
   gradeables: React.PropTypes.arrayOf(React.PropTypes.object),
 };
 
@@ -31,8 +42,12 @@ function mapStateToProps(state) {
   console.log('state in mapStateToProps: ', state);
   return {
     gradeables: state.meeting.gradeable_objects || [],
+    attendees: state.attendees,
   };
 }
 
-export default connect(mapStateToProps)(RenderGradeables);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getAllAttendees }, dispatch);
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(RenderGradeables);

@@ -24,6 +24,7 @@ import RenderClassesforCourse from './components/render_courses';
 import RenderSingleClass from './components/render_single_class';
 import renderDailySchedule from './containers/myDailySchedule';
 import CreateForm from './components/create_all_forms';
+import RenderUserTable from './containers/render_user_table';
 
 const isAuth = () => !!store.getState().user.id;
 
@@ -80,6 +81,7 @@ ReactDOM.render(
         <Route path="/coursecatalog/department/course" component={RenderClassesforCourse} />
         <Route path="/coursecatalog/department/course/class" component={RenderSingleClass} />
         <Route path="/createform" component={CreateForm} />
+        <Route path="/usertable" component={RenderUserTable} />
       </Route>
     </Router>
   </Provider>
