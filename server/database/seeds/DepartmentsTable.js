@@ -86,7 +86,6 @@ exports.seed = (knex, Promise) => {
       name: 'student6',
       first_name: 'John',
       last_name: 'Smith',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'john@gmail.com',
       type_id: 1,
     },
@@ -95,7 +94,6 @@ exports.seed = (knex, Promise) => {
       name: 'student7',
       first_name: 'Alice',
       last_name: 'Adams',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwji9Z3GvbPRAhUF5iYKHSdmC-0QjRwIBw&url=https%3A%2F%2Fwww.flickr.com%2Fphotos%2Fearlysound%2F2076071023&bvm=bv.142059868,d.amc&psig=AFQjCNEOGSEgt_InSKuybmJuO9D0Lf7mUw&ust=1483996935986475',
       email: 'alice@adams.com',
       type_id: 1,
     },
@@ -104,7 +102,6 @@ exports.seed = (knex, Promise) => {
       name: 'student1',
       first_name: 'Alvin',
       last_name: 'Ardsley',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjBvfGdvrPRAhXCOiYKHccZBO8QjRwIBw&url=https%3A%2F%2Fpixabay.com%2Fen%2Fphotos%2Fmale%2520profile%2F&bvm=bv.142059868,d.amc&psig=AFQjCNH0lmbrToElADjjeYclRqZ-MBIZeA&ust=1483997084551366',
       email: 'alvin@gmail.com',
       type_id: 1,
     },
@@ -113,7 +110,6 @@ exports.seed = (knex, Promise) => {
       name: 'student2',
       first_name: 'Jennifer',
       last_name: 'Vasquez',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'jen@gmail.com',
       type_id: 1,
     },
@@ -122,7 +118,6 @@ exports.seed = (knex, Promise) => {
       name: 'student3',
       first_name: 'Erin',
       last_name: 'McClellan',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'erin@gmail.com',
       type_id: 1,
     },
@@ -131,7 +126,6 @@ exports.seed = (knex, Promise) => {
       name: 'student4',
       first_name: 'Lindsay',
       last_name: 'Herzog',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'lindsay@gmail.com',
       type_id: 1,
     },
@@ -140,7 +134,6 @@ exports.seed = (knex, Promise) => {
       name: 'student5',
       first_name: 'Samuel',
       last_name: 'Growan',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'samuel@gmail.com',
       type_id: 1,
     },
@@ -149,7 +142,6 @@ exports.seed = (knex, Promise) => {
       name: 'teacher1',
       first_name: 'Bob',
       last_name: 'Brown',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'bob@gmail.com',
       type_id: 2,
     },
@@ -158,7 +150,6 @@ exports.seed = (knex, Promise) => {
       name: 'teacher2',
       first_name: 'Jack',
       last_name: 'Smith',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'jack@gmail.com',
       type_id: 2,
     },
@@ -167,7 +158,6 @@ exports.seed = (knex, Promise) => {
       name: 'teacher3',
       first_name: 'Jill',
       last_name: 'Jones',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'jill@gmail.com',
       type_id: 2,
     },
@@ -176,7 +166,6 @@ exports.seed = (knex, Promise) => {
       name: 'teacher4',
       first_name: 'Robert',
       last_name: 'Williams',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'robert@gmail.com',
       type_id: 2,
     },
@@ -185,7 +174,6 @@ exports.seed = (knex, Promise) => {
       name: 'teacher5',
       first_name: 'Kush',
       last_name: 'Singh',
-      img_url: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiyhdiGurPRAhUGPiYKHWm_CZ0QjRwIBw&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHuey_Newton_HS_Yearbook.jpeg&bvm=bv.142059868,d.cGw&psig=AFQjCNFLuqmi_ejPuATK5bxaHhxUXvp8zA&ust=1483995994684526',
       email: 'kush@gmail.com',
       type_id: 2,
     },
@@ -1523,7 +1511,7 @@ exports.seed = (knex, Promise) => {
           id: meetingCount,
           object_name: `${gradeableObjectTypesData[meetingCount % 4].name} + ${meetingCount}`,
           type_id: gradeableObjectTypesData[meetingCount % 4].id,
-          module_id: (classItem.id * 4) - Math.round(Math.random() * 4),
+          module_id: (classItem.id * 4) - Math.round(Math.random() * 3),
           meeting_id: meetingCount,
         });
         meetingCount += 1;
@@ -1539,7 +1527,7 @@ exports.seed = (knex, Promise) => {
           id: meetingCount,
           object_name: `${gradeableObjectTypesData[meetingCount % 4].name} ${meetingCount}`,
           type_id: gradeableObjectTypesData[meetingCount % 4].id,
-          module_id: (classItem.id * 4) - Math.round(Math.random() * 4),
+          module_id: (classItem.id * 4) - Math.round(Math.random() * 3),
           meeting_id: meetingCount,
         });
         meetingCount += 1;
@@ -1685,8 +1673,6 @@ exports.seed = (knex, Promise) => {
       }
     });
   });
-
-  console.log(graphArray);
 
   return knex.raw('SET foreign_key_checks = 0;')
     .then(() => Promise.all(tableData.map(table => knex(table).del())))

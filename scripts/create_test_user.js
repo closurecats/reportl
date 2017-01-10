@@ -19,4 +19,5 @@ User.forge({
 }).save())
 .then(() => {
   console.log('Created test user');
+  process.exit();
 });
