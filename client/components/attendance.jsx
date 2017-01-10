@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getAllAttendees, markPresent } from '../actions/index';
+import { getAllAttendees, markPresent, markAbsent } from '../actions/index';
 
 const containerStyle = {
   display: 'flex',
@@ -38,15 +38,40 @@ const thumbnailStyle = {
 };
 
 class RenderAttendees extends Component {
+  constructor(props) {
+    super(props);
+
+    const presentKids = this.props.attendees.filter(eachAttendee => eachAttendee.present);
+    console.log('presentKids', presentKids);
+
+    this.state = {
+      present: presentKids,
+    };
+  }
+
   RenderAttendees() {
     console.log('props: attendees: ', this.props.attendees);
     return this.props.attendees.map(eachAttendee => (
       <button
         onClick={() => {
-          markPresent(eachAttendee.id);
+          const presentIndex = this.state.present.indexOf(eachAttendee.id);
+
+          if (presentIndex === -1) {
+            markPresent(eachAttendee.id);
+            console.log('present!');
+            this.setState({ present: this.state.present.concat([eachAttendee.id]) });
+          } else {
+            console.log('absent!');
+            markAbsent(eachAttendee.id);
+            const newPresent = this.state.present.slice().splice(presentIndex, 1);
+            console.log('newPresent', newPresent);
+            this.setState({ present: newPresent });
+          }
+
+          setTimeout(() => console.log('****', this.state), 2000);
           setTimeout(() => getAllAttendees({ meeting: eachAttendee.meetingId }), 500);
         }}
-        style={eachAttendee.present === 0 ? greenCardStyle : redCardStyle}
+        style={this.state.present.indexOf(eachAttendee.id) !== -1 ? greenCardStyle : redCardStyle}
       >
         <img
           style={thumbnailStyle}

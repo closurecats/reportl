@@ -34,6 +34,25 @@ const attendanceController = {
         res.sendStatus(500);
       });
   },
+  markUserAbsent(req, res) {
+    Attendance.forge({ id: req.params.id }, res)
+      .fetch()
+      .then(updatedAttendance => updatedAttendance.save({
+        present: false,
+      }))
+      .then((updatedAttendanceInfo) => {
+        console.log('New module', JSON.stringify(updatedAttendanceInfo));
+        return res.json(updatedAttendanceInfo);
+      })
+      .catch((err) => {
+        console.log(`attendanceController.markUserPresent - Error: ${err}`);
+        res.sendStatus(500);
+      })
+      .catch((err) => {
+        console.log(`attendanceController.markUserPresent - Error: ${err}`);
+        res.sendStatus(500);
+      });
+  },
 
   // getUserAttendance({ user }, res) {
   //   Attendance.forge({ student_id: user.id })
