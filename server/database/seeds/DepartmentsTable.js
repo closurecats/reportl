@@ -1511,7 +1511,7 @@ exports.seed = (knex, Promise) => {
           id: meetingCount,
           object_name: `${gradeableObjectTypesData[meetingCount % 4].name} + ${meetingCount}`,
           type_id: gradeableObjectTypesData[meetingCount % 4].id,
-          module_id: (classItem.id * 4) - Math.round(Math.random() * 4),
+          module_id: (classItem.id * 4) - Math.round(Math.random() * 3),
           meeting_id: meetingCount,
         });
         meetingCount += 1;
@@ -1527,7 +1527,7 @@ exports.seed = (knex, Promise) => {
           id: meetingCount,
           object_name: `${gradeableObjectTypesData[meetingCount % 4].name} ${meetingCount}`,
           type_id: gradeableObjectTypesData[meetingCount % 4].id,
-          module_id: (classItem.id * 4) - Math.round(Math.random() * 4),
+          module_id: (classItem.id * 4) - Math.round(Math.random() * 3),
           meeting_id: meetingCount,
         });
         meetingCount += 1;
