@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const graphDataContoller = require('../controllers/graphDataContoller');
+const graphDataController = require('../controllers/graphDataController');
 
-router.post('/:id', graphDataContoller.addData);
-router.get('/', graphDataContoller.getAll);
+router.post('/:meetingId/:userId', graphDataController.addGrade);
+router.get('/', graphDataController.getAll);
 
 module.exports = router;

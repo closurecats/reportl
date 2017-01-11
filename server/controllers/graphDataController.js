@@ -2,8 +2,9 @@ const GraphModel = require('../models/graphModel');
 
 const graphDataController = {
 
-  addData({ body: gradeableobjectTypeData }, res) {
-    GraphModel.forge(gradeableobjectTypeData)
+  addGrade(req, res) {
+    console.log('GraphModel req.params.id', req.params.meetingId, req.params.userId, req.params.data);
+    GraphModel.forge()
       .save()
       .then((gradeableobjectstype) => {
         console.log('New module', JSON.stringify(gradeableobjectstype));

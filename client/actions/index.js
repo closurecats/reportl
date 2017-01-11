@@ -48,6 +48,14 @@ export function getClassById(classId) {
   };
 }
 
+export function addGrade(meetingId, userId, grade) {
+  const request = axios.post(`/api/graphdata/${meetingId}/${userId}/${grade}`);
+  return {
+    type: 'ADD_GRADE',
+    payload: request,
+  };
+}
+
 export function deleteUser(id) {
   const endpoint = `/api/users/${id}`;
   const request = axios.delete(endpoint);
