@@ -78,6 +78,7 @@ class App extends React.Component {
           {this.isAuthType('student', 'teacher') && <Link to="/coursecatalog/department/"><button style={buttonStyle} onClick={() => this.switchView('School')}>My School</button></Link>}
           {(this.isAuth() && <div style={buttonStyle}>{`Welcome: ${this.props.user.name} | ID: ${this.props.user.id}`}</div>)}
           {this.isAuthType('student', 'teacher') && <Link to="/updateprofile"><button style={buttonStyle} onClick={() => this.switchView('Settings')}><img alt="Settings" src="../assets/ic_settings_white_24dp_1x.png" /></button></Link>}
+          {this.isAuth() && <button style={buttonStyle} onClick={this.props.logout}>Logout</button>}
         </div>
         {this.currentView()}
         <div style={container}>
@@ -114,8 +115,13 @@ App.propTypes = {
     typeId: React.PropTypes.number,
     updatedAt: React.PropTypes.string,
   }),
+  logout: React.PropTypes.func,
 };
+
+const logout = () => ({
+  type: 'LOGOUT',
+});
 
 export default connect(state => ({
   user: state.user,
-}))(App);
+}), { logout })(App);
