@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllAttendees } from '../actions/index';
+import ObjectForm from '../containers/gradeableobject_form';
 
 class RenderGradeables extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userGrades: {},
-    };
-  }
 
   renderGradeables() {
     console.log('props: gradeables: ', this.props.gradeables);
@@ -28,6 +22,11 @@ class RenderGradeables extends Component {
       <div>
         <h3>Assignments/Exams</h3>
         {this.renderGradeables()}
+        <ol>
+          {this.props.attendees.map(attendee => (
+            <ObjectForm attendee={attendee} />
+          ))}
+        </ol>
       </div>
     );
   }
@@ -39,7 +38,6 @@ RenderGradeables.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log('state in mapStateToProps: ', state);
   return {
     gradeables: state.meeting.gradeable_objects || [],
     attendees: state.attendees,

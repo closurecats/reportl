@@ -1,21 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { addGrade } from '../actions/index';
 
-const RenderAttendee = ({ attendee }) => (
-  <ol>
-    {this.props.attendees.map(eachAttendee => (
+class RenderAttendee extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      inputValue: '',
+    };
+  }
+
+  onInputChange(target) {
+    this.setState({ inputValue: target });
+  }
+
+  render() {
+    return (
       <li>
-        {eachAttendee.user.fullName}
-        <input type="text" />
+        {this.props.attendee.user.fullName}
+        <input
+          value={this.state.inputValue}
+          onChange={event => this.onInputChange(event.target.value)}
+        />
         <button
           type="submit"
           onClick={() => { console.log('attendee'); }}
         >Add Grade</button>
       </li>
-    ))}
-  </ol>
-);
+    );
+  }
+}
 
 
 RenderAttendee.propTypes = {
@@ -27,4 +43,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(RenderAttendee);
+export default connect(null, mapDispatchToProps)(RenderAttendee);
