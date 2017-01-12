@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
 import { store } from '../reducers/';
 
 export function auth(token = false) {
@@ -10,6 +11,7 @@ export function auth(token = false) {
 
 export function loginSubmit(login) {
   const request = axios.post('/auth/login', login);
+  store.dispatch(reset('login'));
   return {
     type: 'LOGIN_SUBMITTED',
     payload: request,
@@ -18,6 +20,7 @@ export function loginSubmit(login) {
 
 export function createUser(user) {
   const request = axios.post('/api/users', user);
+  store.dispatch(reset('addUser'));
   return {
     type: 'CREATE_USER',
     payload: request,
@@ -193,6 +196,7 @@ export function markAbsent(attendanceId) {
 
 export function createDepartment(department) {
   const request = axios.post('api/departments', department);
+  store.dispatch(reset('addDepartment'));
   return {
     type: 'CREATE_DEPARTMENT',
     payload: request,
@@ -217,6 +221,7 @@ export function getAllCourses() {
 
 export function createCourse(course) {
   const request = axios.post('api/courses', course);
+  store.dispatch(reset('addCourse'));
   return {
     type: 'CREATE_COURSE',
     payload: request,
