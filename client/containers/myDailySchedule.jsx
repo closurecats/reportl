@@ -67,18 +67,6 @@ class renderDailySchedule extends Component {
       <div>
         <div className="dailySchedule">
           <h3>Daily Schedule</h3>
-          <button
-            onClick={() => { this.props.getChartData(); }}
-          >
-            <Link to="/usergradegraph">Student Analytics</Link></button>
-          <button
-            onClick={() => { this.props.getChartData(); }}
-          >
-            <Link to="/classgradegraph">Class Analytics</Link></button>
-          <button
-            onClick={() => { this.props.getChartData(); }}
-          >
-            <Link to="/usertable">User Grade Table</Link></button>
           <div style={calendarStyle}>
             {this.renderScheduleInformation()}
           </div>
