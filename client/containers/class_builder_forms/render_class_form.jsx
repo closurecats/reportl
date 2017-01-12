@@ -5,15 +5,35 @@ import { getClassById } from '../../actions/index';
 class RenderClassForm extends Component {
 
   componentWillMount() {
-    this.props.getClassById(this.props.classId);
+    this.props.getClassById(this.props.classes.id);
   }
 
   renderClasses() {
-    return this.props.selectedClass.map(eachClass => (
-      <li key={eachClass.class_name}>
-        <div>Class Name: {eachClass.name} ; Class Description: {eachClass.course_id}</div>
-      </li>
-    ));
+    return (
+      <div>
+        <div>Class Name: {this.props.selectedClass.name}</div>
+        <div>Class Teacher: {this.props.selectedClass.teacher_id}</div>
+        <div>Schedule:
+          <ul>
+            <li> {this.props.selectedClass.monday === 1 ?
+              <p>{this.props.selectedClass.startTime} to {this.props.selectedClass.endTime}</p> :
+              <p>No Classes</p>}</li>
+            <li> {this.props.selectedClass.tuesday === 1 ?
+              <p>{this.props.selectedClass.start_time} to {this.props.selectedClass.end_time}</p> :
+              <p>No Classes</p>}</li>
+            <li> {this.props.selectedClass.wednesday === 1 ?
+              <p>{this.props.selectedClass.start_time} to {this.props.selectedClass.end_time}</p> :
+              <p>No Classes</p>}</li>
+            <li> {this.props.selectedClass.thursday === 1 ?
+              <p>{this.props.selectedClass.start_time} to {this.props.selectedClass.end_time}</p> :
+              <p>No Classes</p>}</li>
+            <li> {this.props.selectedClass.friday === 1 ?
+              <p>{this.props.selectedClass.start_time} to {this.props.selectedClass.end_time}</p> :
+              <p>No Classes</p>}</li>
+          </ul>
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -30,12 +50,15 @@ class RenderClassForm extends Component {
 
 RenderClassForm.propTypes = {
   getClassById: React.PropTypes.func,
-  classId: React.PropTypes.func,
-  selectedClass: React.PropTypes.arrayOf(React.PropTypes.object),
+  selectedClass: React.PropTypes.obj,
+  classes: React.PropTypes.obj,
 };
 
 function mapStateToProps(state) {
-  return { classId: state.classId, selectedClass: state.selectedClass };
+  return {
+    selectedClass: state.selectedClass,
+    classes: state.classes,
+  };
 }
 
 export default connect(mapStateToProps, { getClassById })(RenderClassForm);

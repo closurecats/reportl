@@ -28,7 +28,7 @@ export function createUser(user) {
 }
 
 export function makeNewClass(classes) {
-  const request = axios.post('/createclass', classes);
+  const request = axios.post('/api/classes/createclass', classes);
   return {
     type: 'CLASS_CREATED',
     payload: request,
@@ -47,6 +47,14 @@ export function getClassById(classId) {
   const request = axios.get(`/api/classes/${classId}`);
   return {
     type: 'GET_CLASSES_BY_ID',
+    payload: request,
+  };
+}
+
+export function updateClassById(classId, info) {
+  const request = axios.put(`/api/classes/${classId}`, info);
+  return {
+    type: 'UPDATE_CLASS_BY_ID',
     payload: request,
   };
 }
@@ -133,14 +141,6 @@ export function addClassId(id) {
   return {
     type: 'ADD_CLASS_ID',
     payload: id,
-  };
-}
-
-export function updateClass(form) {
-  const request = axios.put(`/api/classes/${form.id}`, form);
-  return {
-    type: 'UPDATE_CLASS_INFO',
-    payload: request,
   };
 }
 
