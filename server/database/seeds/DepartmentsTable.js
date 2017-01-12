@@ -1513,7 +1513,7 @@ exports.seed = (knex, Promise) => {
     calendarData.forEach((calendarDay) => {
       if (calendarDay.day_count > 47) return;
 
-      if (calendarDay.week_day === 'Tuesday' || calendarDay.week_day === 'Thursday') {
+      if ((calendarDay.week_day === 'Tuesday' && classItem.tuesday) || (calendarDay.week_day === 'Thursday' && classItem.thursday)) {
         meetingsArray.push({
           id: meetingCount,
           calendar_day: calendarDay.id,
@@ -1549,9 +1549,9 @@ exports.seed = (knex, Promise) => {
     });
   });
 
-  meetingsArray[34].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/3cXeLc0zGSVNeg';
-  meetingsArray[69].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/tnzva0UI2fTO0j';
-  meetingsArray[105].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/CcxlJyMDDJuOqp';
+  meetingsArray[20].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/3cXeLc0zGSVNeg';
+  meetingsArray[41].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/tnzva0UI2fTO0j';
+  meetingsArray[62].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/CcxlJyMDDJuOqp';
 
   userData.forEach((user) => {
     if (user.type_id === 1) {
