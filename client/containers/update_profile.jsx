@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { createProfileInformation } from '../actions/index';
 
@@ -88,14 +89,14 @@ class UpdateProfile extends Component {
           }}
         />
         <br />
-        <button
+        <Link to="/profile"><button
           type="submit"
           onClick={() => {
             this.props.createProfileInformation(this.state);
             this.onFormSubmit();
           }}
 
-        >Submit</button>
+        >Submit</button></Link>
       </div>
     );
   }
