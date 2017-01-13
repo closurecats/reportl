@@ -3,12 +3,12 @@ import { Field, reduxForm } from 'redux-form';
 import { uploadProfilePhoto } from '../actions/index';
 
 const UploadFile = ({ handleSubmit }) => (
-  <div>
+  <div className="form">
     <form onSubmit={handleSubmit}>
       <div>
-        <Field name="uploadedFile" component="input" type="file" />
+        <Field className="field" name="uploadedFile" component="input" type="file" />
       </div>
-      <button type="submit">Submit</button>
+      <button className="formButton" type="submit">Submit</button>
     </form>
   </div>
 );
