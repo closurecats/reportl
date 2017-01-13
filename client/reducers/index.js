@@ -66,6 +66,6 @@ const rootReducer = combineReducers({
 });
 
 const logger = createLogger();
-const store = createStore(rootReducer, applyMiddleware(promise, logger));
+const store = process.env.NODE_ENV !== 'production' ? createStore(rootReducer, applyMiddleware(promise, logger)) : createStore(rootReducer, applyMiddleware(promise));
 
 export { rootReducer, store };
