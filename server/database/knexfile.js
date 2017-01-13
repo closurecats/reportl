@@ -27,5 +27,13 @@ module.exports = {
       max: 1,
     },
   },
-  production: { client, connection, migrations },
+  // production: { client, connection, migrations },
+  production: {
+    client,
+    connection,
+    migrations,
+    pool: {
+      max: 1,
+    },
+  },
 };

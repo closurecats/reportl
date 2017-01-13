@@ -40,6 +40,10 @@ const userController = {
   },
 
   newUser({ body: userData, baseUrl, originalUrl }, res) {
+    if (!Object.hasOwnProperty.call(userData, 'name')) {
+      userData.name = userData.firstName + userData.lastName;
+    }
+
     User.forge(userData)
       .save()
       .then((user) => {

@@ -5,25 +5,27 @@ import { Link } from 'react-router';
 import { searchCalendar, getMeetingById, getAllAttendees, getChartData } from '../actions/index';
 
 const calendarStyle = {
+  borderStyle: 'none',
   display: 'block',
-  borderStyle: 'solid',
   backgroundColor: 'white',
   height: '400px',
   width: '500px',
   margin: '10px',
-  borderWidth: 'thick',
   fontSize: 'x-large',
-  padding: '5px',
+  padding: '2px',
 };
 
 const meetingStyle = {
   borderStyle: 'none',
-  backgroundColor: 'grey',
+  backgroundColor: '#64e3ba',
   height: '100px',
   width: '500px',
   margin: '25px 0 0 0',
   fontSize: '25px',
 };
+
+// const UserType = ({ user }) => {
+// };
 
 class renderDailySchedule extends Component {
   componentWillMount() {
@@ -35,51 +37,80 @@ class renderDailySchedule extends Component {
     });
   }
 
+  isAuth() {
+    return !!this.props.user.id;
+  }
+
+  isAuthType(...types) {
+    return this.isAuth() && !!this.props.user.type && types.includes(this.props.user.type.name);
+  }
+
   renderScheduleInformation() {
     return (
-      <div>{this.props.calendarSearchResult.map(day => (
-        <div>
-          <div>Classes for {day.weekDay} {day.dayOfMonth}, {day.month}</div>
-          <div>{day.meetings.map(meetings => (
-            <div>
-              <Link to="/lesson">
-                <button
-                  onClick={() => {
-                    this.props.getMeetingById(meetings.id);
-                    this.props.getAllAttendees(meetings.id);
-                  }}
-                  style={meetingStyle}
-                >
-                  <div>{meetings.class.name}</div>
-                  <div>{meetings.startTime}</div>
-                  <div>{meetings.endTime}</div>
-                </button>
-              </Link>
-            </div>
-            ))}</div>
+      <div>
+        {this.props.calendarSearchResult.map(day => this.renderDayMeetings(day))}
+      </div>
+    );
+  }
+
+  renderDayMeetings(day) {
+    return (
+      <div>
+        <div className="calWeekDay">
+          Class for {`${day.weekDay} ${day.dayOfMonth}, ${day.month}`}
         </div>
-      ))}</div>
+        <div>
+          {day.meetings.map(meeting => this.renderMeeting(meeting))}
+        </div>
+      </div>
+    );
+  }
+
+  renderMeeting(meeting) {
+    if (this.isAuthType('teacher')) {
+      return (
+        <Link to="/lesson">
+          <button
+            onClick={() => {
+              this.props.getMeetingById(meeting.id);
+              this.props.getAllAttendees(meeting.id);
+            }}
+            style={meetingStyle}
+          >
+            <div>{meeting.class.name}</div>
+            <div>{meeting.startTime}</div>
+            <div>{meeting.endTime}</div>
+          </button>
+        </Link>
+      );
+    }
+
+    return (
+      <Link to="/lesson/student">
+        <button
+          onClick={() => {
+            this.props.getMeetingById(meeting.id);
+          }}
+          style={meetingStyle}
+        >
+          <div>{meeting.class.name}</div>
+          <div>{meeting.startTime}</div>
+          <div>{meeting.endTime}</div>
+        </button>
+      </Link>
     );
   }
 
   render() {
     return (
       <div>
-        <div>
+        <div className="dailySchedule">
           <h3>Daily Schedule</h3>
-          <button
-            onClick={() => { this.props.getChartData(); }}
-          >
-            <Link to="/usergradegraph">Student Analytics</Link></button>
-          <button
-            onClick={() => { this.props.getChartData(); }}
-          >
-            <Link to="/classgradegraph">Class Analytics</Link></button>
           <div style={calendarStyle}>
             {this.renderScheduleInformation()}
           </div>
-          {this.props.children}
         </div>
+        {this.props.children}
       </div>
     );
   }
@@ -90,9 +121,32 @@ renderDailySchedule.propTypes = {
   searchCalendar: React.PropTypes.func,
   getMeetingById: React.PropTypes.func,
   getAllAttendees: React.PropTypes.func,
-  getChartData: React.PropTypes.func,
   calendarSearchResult: React.PropTypes.arrayOf(React.PropTypes.object),
   children: React.PropTypes.arrayOf(React.PropTypes.object),
+  user: React.PropTypes.shape({
+    address: React.PropTypes.string,
+    createdAt: React.PropTypes.string,
+    dateOfBirth: React.PropTypes.string,
+    description: React.PropTypes.string,
+    email: React.PropTypes.string,
+    firstName: React.PropTypes.string,
+    fullName: React.PropTypes.string,
+    id: React.PropTypes.number,
+    imgUrl: React.PropTypes.string,
+    isDisabled: React.PropTypes.number,
+    lastName: React.PropTypes.string,
+    name: React.PropTypes.string,
+    phoneNumber: React.PropTypes.string,
+    token: React.PropTypes.string,
+    type: React.PropTypes.shape({
+      createdAt: React.PropTypes.string,
+      id: React.PropTypes.number,
+      name: React.PropTypes.string,
+      updatedAt: React.PropTypes.string,
+    }),
+    typeId: React.PropTypes.number,
+    updatedAt: React.PropTypes.string,
+  }),
 };
 
 function mapDispatchToProps(dispatch) {
@@ -105,7 +159,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return { calendarSearchResult: state.calendarSearchResult };
+  return { calendarSearchResult: state.calendarSearchResult, user: state.user };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(renderDailySchedule);

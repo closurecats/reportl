@@ -1,0 +1,43 @@
+.reactable-column-header{
+  background-color: #cbd9e4;
+  font-weight: 700;
+  color: #093367;
+  height: 30px;
+  margin: 5px auto;
+}
+
+.reactable-data{
+  background-color: #f4fbfe;
+  color: #508DBB;
+  padding:5px;
+}
+
+.reactable-pagination{
+  justify-content: center;
+}
+.reactable-page-button{
+  padding: 5px;
+  margin-top: 5px;
+  margin: 0 5px;
+  color: #288ad6;
+  border-style: solid;
+  border-color: #0FDEBD;
+}
+
+.reactable-next-page{
+  padding: 5px;
+  margin-top: 5px;
+  margin: 0 5px;
+  color: #288ad6;
+  border-style: solid;
+  border-color: #0FDEBD;
+}
+
+.reactable-previous-page{
+  padding: 5px;
+  margin-top: 5px;
+  margin: 0 5px;
+  color: #288ad6;
+  border-style: solid;
+  border-color: #0FDEBD;
+}

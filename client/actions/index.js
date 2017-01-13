@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
 import { store } from '../reducers/';
 
 export function auth(token = false) {
@@ -10,6 +11,7 @@ export function auth(token = false) {
 
 export function loginSubmit(login) {
   const request = axios.post('/auth/login', login);
+  store.dispatch(reset('login'));
   return {
     type: 'LOGIN_SUBMITTED',
     payload: request,
@@ -18,6 +20,7 @@ export function loginSubmit(login) {
 
 export function createUser(user) {
   const request = axios.post('/api/users', user);
+  store.dispatch(reset('addUser'));
   return {
     type: 'CREATE_USER',
     payload: request,
@@ -25,7 +28,7 @@ export function createUser(user) {
 }
 
 export function makeNewClass(classes) {
-  const request = axios.post('/createclass', classes);
+  const request = axios.post('/api/classes/createclass', classes);
   return {
     type: 'CLASS_CREATED',
     payload: request,
@@ -48,12 +51,38 @@ export function getClassById(classId) {
   };
 }
 
+export function updateClassById(classId, info) {
+  const request = axios.put(`/api/classes/${classId}`, info);
+  return {
+    type: 'UPDATE_CLASS_BY_ID',
+    payload: request,
+  };
+}
+
+export function addGrade(meetingId, userId, grade) {
+  const request = axios.post(`/api/graphdata/${meetingId}/${userId}/${grade}`);
+  return {
+    type: 'ADD_GRADE',
+    payload: request,
+  };
+}
+
 export function deleteUser(id) {
   const endpoint = `/api/users/${id}`;
   const request = axios.delete(endpoint);
 
   return {
     type: 'DELETE_USER',
+    payload: request,
+  };
+}
+
+export function getUserById(id) {
+  const endpoint = `/api/users/${id}`;
+  const request = axios.get(endpoint);
+
+  return {
+    type: 'GET_USER',
     payload: request,
   };
 }
@@ -115,14 +144,6 @@ export function addClassId(id) {
   };
 }
 
-export function updateClass(form) {
-  const request = axios.put(`/api/classes/${form.id}`, form);
-  return {
-    type: 'UPDATE_CLASS_INFO',
-    payload: request,
-  };
-}
-
 export function getDepartmentInformation() {
   const request = axios.get('api/departments');
   return {
@@ -175,6 +196,7 @@ export function markAbsent(attendanceId) {
 
 export function createDepartment(department) {
   const request = axios.post('api/departments', department);
+  store.dispatch(reset('addDepartment'));
   return {
     type: 'CREATE_DEPARTMENT',
     payload: request,
@@ -199,6 +221,7 @@ export function getAllCourses() {
 
 export function createCourse(course) {
   const request = axios.post('api/courses', course);
+  store.dispatch(reset('addCourse'));
   return {
     type: 'CREATE_COURSE',
     payload: request,

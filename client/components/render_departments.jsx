@@ -11,26 +11,26 @@ class RenderDepartments extends Component {
 
   renderDepartments() {
     return this.props.departments.map(department => (
-      <div key={department.id}>
-        <li>{department.name}
-          <div>
-            {department.courses.map(course => (
-              <button onClick={() => this.props.getCourseDetails(course.id)}>
-                <Link to="/coursecatalog/department/course">{course.name}</Link>
-              </button>
-            ))}
-          </div>
-        </li>
+      <div key={department.id} className="courseCatCard">
+        <div className="courseCatalogHeaders">{department.name}</div>
+        <div>
+          {department.courses.map(course => (
+            <Link to="/coursecatalog/department/course">
+              <button
+                className="courseCatalogButton"
+                onClick={() => this.props.getCourseDetails(course.id)}
+              >
+                {course.name}
+              </button></Link>
+          ))}
+        </div>
       </div>
     ));
   }
   render() {
     return (
-      <div>
-        <h3>Departments</h3>
-        <ul>
-          {this.renderDepartments()}
-        </ul>
+      <div className="courseCat">
+        {this.renderDepartments()}
       </div>
     );
   }

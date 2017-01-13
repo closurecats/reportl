@@ -10,25 +10,25 @@ const classes = ['American Literature', 'Pre-Algebra', 'Biology 1', 'Biology 2',
 class classAnalyticsDashboard extends Component {
 
   componentWillMount() {
-    if (!this.props.gradeData) {
-      this.props.getChartData();
-    }
+    this.props.getChartData();
+    this.props.setSelectedClass('American Literature');
   }
 
   render() {
     return (
       <div>
+        <h2 className="pageTitle">Grades for {this.props.selectedClassGraph}</h2>
         <p>Select Class</p>
-        <div>
+        <div className="graphButtonsContainer">
           {classes.map(classItem => (
             <button
+              className="graphClassButtons"
               onClick={() => { this.props.setSelectedClass(classItem); }}
             >
               {classItem}
             </button>
           ))}</div>
         <div>
-          <h2>Grades for {this.props.selectedClassGraph}</h2>
           <RenderAreaChart />
           <RenderGradeChartByUser />
         </div>
@@ -41,7 +41,6 @@ classAnalyticsDashboard.propTypes = {
   selectedClassGraph: React.PropTypes.string,
   getChartData: React.PropTypes.func,
   setSelectedClass: React.PropTypes.func,
-  gradeData: React.PropTypes.arrayOf(React.PropTypes.object),
 };
 
 function mapDispatchToProps(dispatch) {

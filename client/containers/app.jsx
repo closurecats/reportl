@@ -5,31 +5,6 @@ import DashSubNav from './dashboardSubNav';
 import SchoolSubNav from './schoolSubNav';
 import SettingsSubNav from './settingsSubNav';
 
-const titleStyle = {
-  marginLeft: '0px',
-};
-
-const navStyle = {
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  backgroundColor: 'black',
-  color: 'white',
-};
-
-const buttonStyle = {
-  backgroundColor: 'black',
-  color: 'white',
-  border: 'none',
-  fontSize: 'large',
-  outline: 'none',
-};
-
-const container = {
-  display: 'flex',
-  justifyContent: 'center',
-};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -72,15 +47,23 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div style={navStyle}>
-          <h1 style={titleStyle}>reportl</h1>
-          {this.isAuthType('student', 'teacher') && <Link to="/dashboard"><button style={buttonStyle} onClick={() => this.switchView('Dashboard')}>My Dashboard</button></Link>}
-          {this.isAuthType('student', 'teacher') && <Link to="/coursecatalog"><button style={buttonStyle} onClick={() => this.switchView('School')}>My School</button></Link>}
-          {(this.isAuth() && <div style={buttonStyle}>{`Welcome: ${this.props.user.name} | ID: ${this.props.user.id}`}</div>)}
-          {this.isAuthType('student', 'teacher') && <Link to="/updateprofile"><button style={buttonStyle} onClick={() => this.switchView('Settings')}><img alt="Settings" src="../assets/ic_settings_white_24dp_1x.png" /></button></Link>}
+        <div className="nav">
+          <h1 className="title">reportl</h1>
+          {this.isAuthType('student', 'teacher') && <Link to="/dashboard"><button className="navButtons" onClick={() => this.switchView('Dashboard')}>My Dashboard</button></Link>}
+          {this.isAuthType('student', 'teacher') && <Link to="/coursecatalog/department/"><button className="navButtons" onClick={() => this.switchView('School')}>My School</button></Link>}
+          <div>
+            {(this.isAuth() &&
+              <div className="navButtons">Welcome {this.props.user.name} |
+              <button className="logout" onClick={this.props.logout}>Logout</button>
+                <Link to="/updateprofile">
+                  <button className="navButtons" onClick={() => this.switchView('Settings')}>
+                    <img alt="Settings" src="../assets/ic_settings_white_24dp_1x.png" />
+                  </button></Link>
+              </div>)}
+          </div>
         </div>
         {this.currentView()}
-        <div style={container}>
+        <div className="main">
           {this.props.children}
         </div>
       </div>
@@ -114,8 +97,13 @@ App.propTypes = {
     typeId: React.PropTypes.number,
     updatedAt: React.PropTypes.string,
   }),
+  logout: React.PropTypes.func,
 };
+
+const logout = () => ({
+  type: 'LOGOUT',
+});
 
 export default connect(state => ({
   user: state.user,
-}))(App);
+}), { logout })(App);

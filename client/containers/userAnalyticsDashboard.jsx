@@ -12,34 +12,36 @@ const users = ['John Smith', 'Alice Adams', 'Alvin Ardsley', 'Jennifer Vasquez',
 class userAnalyticsDashboard extends Component {
 
   componentWillMount() {
-    if (!this.props.gradeData) {
-      this.props.getChartData();
-    }
+    this.props.getChartData();
+    this.props.setSelectedUser('John Smith');
+    this.props.setSelectedClass('American Literature');
   }
 
   render() {
     return (
       <div>
-        <div>
-          <p>Select User</p>
+        <h2>Grades for {this.props.selectedUserGraph} in {this.props.selectedClassGraph}</h2>
+        <p>Select User</p>
+        <div className="graphButtonsContainer graphUserButtonsContainer">
           {users.map(user => (
             <button
+              className="graphClassButtons graphUserButtons"
               onClick={() => { this.props.setSelectedUser(user); }}
             >
               {user}
             </button>))}
         </div>
         <p>Select Class</p>
-        <div>
+        <div className="graphButtonsContainer">
           {classes.map(classItem => (
             <button
+              className="graphClassButtons"
               onClick={() => { this.props.setSelectedClass(classItem); }}
             >
               {classItem}
             </button>
           ))}</div>
         <div>
-          <h2>Grades for {this.props.selectedUserGraph} in {this.props.selectedClassGraph}</h2>
           <RenderPieChart />
           <RenderScatterPlotChart />
           <RenderGradeChart />
@@ -55,7 +57,6 @@ userAnalyticsDashboard.propTypes = {
   getChartData: React.PropTypes.func,
   setSelectedUser: React.PropTypes.func,
   setSelectedClass: React.PropTypes.func,
-  gradeData: React.PropTypes.arrayOf(React.PropTypes.object),
 };
 
 function mapDispatchToProps(dispatch) {
@@ -64,7 +65,6 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    gradeData: state.gradeData,
     selectedClassGraph: state.selectedClassGraph,
     selectedUserGraph: state.selectedUserGraph,
   };

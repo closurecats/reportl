@@ -1,0 +1,168 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #64e3ba;
+$secondary-color: #eba593;
+$tertiary-color: #C26047;
+$quaternary-color: #188160;
+$dark: #09241B;
+$light: #fdf7f4;
+
+@import 'reactable';
+@import 'app';
+@import 'subNav';
+@import 'calendar';
+@import 'course';
+@import 'class';
+@import 'lesson';
+@import 'profile';
+@import 'homepage';
+@import 'forms';
+
+.courseCatalogButton{
+  background-color: $primary-color;
+  width: 250px;
+  height: 75px;
+  font-size: 20px;
+  color: $light;
+  font-weight: bold;
+  padding: 15px;
+  border: none;
+}
+
+.courseCatCard {
+  box-shadow: 10px 10px 5px lightgrey;
+  margin: 20px;
+}
+
+.courseCat {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.courseDetails{
+  text-align: left;
+}
+
+.courseCatalogHeaders{
+  font-size: 25px;
+  text-align: center;
+  background-color: $quaternary-color;
+  color: $light;
+  padding: 5px;
+}
+
+.classSection{
+  border: 1px;
+  background-color: #c7e6aa;
+  padding: 5px;
+}
+
+.formSection{
+  border: 1px;
+  background-color: #f4fbfe;
+  padding-bottom: 15px;
+}
+
+.userCard {
+  display: flex;
+  background-color: $primary-color;
+  border: none;
+  width: 265px;
+  margin: 10px;
+  align-items: center;
+  color: $light;
+  font: $font-stack;
+  box-shadow: 10px 10px 5px lightgrey;
+}
+
+.userCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10%;
+  margin-right: 10%;
+  align-content: space-between;
+}
+
+.userThumbnail {
+  height: 80px;
+  width: 80px;
+}
+
+.userText {
+  margin-left: 10px;
+}
+
+.userViewButton {
+  display: block;
+  box-shadow: 10px 10px 5px lightgrey;
+  background-color: $quaternary-color;
+  color: $light;
+  margin: 15px;
+  padding: 10px;
+  font-size: large;
+  border: none;
+  margin-top: 30px;
+  outline: none;
+}
+
+.userButton {
+  display: block;
+  background-color: $quaternary-color;
+  border: none;
+  margin: 3px;
+  color: $light;
+}
+
+.graphButtonsContainer{
+  border-width: 4px;
+  border-color: #288ad6;
+  border-style: solid;
+  padding: 5px;
+}
+
+.graphUserButtonsContainer{
+  border-color: #0FDEBD;
+}
+
+.graphClassButtons{
+  background-color: #288ad6;
+  width: 80px;
+  height: 60px;
+  font-size: 12px;
+  color: white;
+  justify-content: center;
+  border: none;
+  padding:15px;
+  margin: 10px;
+}
+
+.graphClassButtons:hover{
+  background-color: #0FDEBD;
+}
+
+.graphUserButtons{
+  background-color: #0FDEBD;
+}
+
+.graphUserButtons:hover{
+  background-color: #288ad6;
+}
+
+.dailySchedule {
+  border-style: none;
+  text-align: center;
+  font-size: 25px;
+  color: black;
+  border-radius: 10px;
+}
+
+.dailySchedule {
+  button {
+    margin-right: 5px;
+    background-color: $quaternary-color;
+    font-size: 20px;
+    height: 30px;
+  }
+}

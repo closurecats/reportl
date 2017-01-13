@@ -1,36 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+ /*       <h2>{this.props.selectedClass.map(title => (
+          <div>{title.name}</div>
+          ))}</h2> */
+
 class RenderSingleClass extends Component {
 
   renderSingleClass() {
     return (
       <div>{this.props.selectedClass.map(classInfo => (
         <div>
-          <div>Course Name: {classInfo.course.name}</div>
-          <div>Class ID: {classInfo.id}</div>
-          <div>Full Name:{classInfo.teacher.fullName}</div>
-          <h2>Modules</h2>
-          <div>{classInfo.modules.map(module => (
+          <div className="itemBlock">
+            <h2 className="titleBlock">{this.props.selectedClass[0].name}</h2>
+            <div className="textBlock">Teacher: {this.props.teacher}</div>
+            <div className="textBlock">Class ID: {classInfo.id}</div>
+          </div>
+          <div className="columnContainer">
             <div>
-              <div>{module.moduleName}</div>
-              <div>{module.percentOfClassGrade}</div>
-              <div>{module.startDate}</div>
-              <div>{module.endDate}</div>
+              <h2 className="titleBlock">Modules</h2>
+              <div className="leftColumn">{classInfo.modules.map(module => (
+                <div className="itemBlock">
+                  <div className="titleBlock">{module.moduleName}</div>
+                  <div className="textBlock">
+                    Percent of Class Grade: {module.percentOfClassGrade}
+                  </div>
+                  <div className="textBlock">Start Date: {module.startDate.slice(5, 10)}</div>
+                  <div className="textBlock">End Date: {module.endDate.slice(5, 10)}</div>
+                </div>
+              ))}</div>
             </div>
-            ))}</div>
-          <h2>Students</h2>
-          <div>{classInfo.users.map(user => (
-            <div>
-              <div>{user.imgUrl}</div>
-              <div>{user.fullName}</div>
-              <div>{user.description}</div>
-              <div>{user.dateOfBirth}</div>
-              <div>{user.email}</div>
-              <div>{user.phoneNumber}</div>
-              <div>{user.address}</div>
+            <div className="rightColumn">
+              <h2 className="titleBlock">Students</h2>
+              <div className="itemBlock">{classInfo.users.map(user => (
+                <div className="titleBlock">{user.fullName}</div>
+              ))}</div>
             </div>
-          ))}</div>
+          </div>
         </div>
         ))}
       </div>
@@ -40,12 +46,7 @@ class RenderSingleClass extends Component {
   render() {
     return (
       <div>
-        <h2>{this.props.selectedClass.map(title => (
-          <div>{title.name}</div>
-          ))}</h2>
-        <div>
-          {this.renderSingleClass()}
-        </div>
+        {this.renderSingleClass()}
       </div>
     );
   }
@@ -53,10 +54,11 @@ class RenderSingleClass extends Component {
 
 RenderSingleClass.propTypes = {
   selectedClass: React.PropTypes.arrayOf(React.PropTypes.object),
+  teacher: React.PropTypes.string,
 };
 
 function mapStateToProps(state) {
-  return { selectedClass: state.selectedClass };
+  return { selectedClass: state.selectedClass, teacher: state.getUser.fullName };
 }
 
 export default connect(mapStateToProps)(RenderSingleClass);

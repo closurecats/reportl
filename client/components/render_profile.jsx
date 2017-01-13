@@ -4,22 +4,16 @@ import { getProfileInformation } from '../actions/index';
 
 class RenderProfile extends Component {
   componentWillMount() {
-    this.props.getProfileInformation(13);
+    this.props.getProfileInformation(this.props.user.id);
   }
 
   render() {
     return (
-      <div>
-        <h2>Profile</h2>
-        <img alt="Profile Pic" src={`/api/files/${this.props.profile.profilePhotoId}`} />
-        <ul>
-          <li>{this.props.profile.fullName}</li>
-          <li>{this.props.profile.email}</li>
-          <li>{this.props.profile.description}</li>
-          <li>{this.props.profile.address}</li>
-          <li>{this.props.profile.phone}</li>
-          <li>{this.props.profile.dob}</li>
-        </ul>
+      <div className="profileCard">
+        <img className="profileImage" alt="Profile Pic" src={`/api/files/${this.props.profile.profilePhotoId}`} />
+        <p>{this.props.profile.fullName}</p>
+        <p>{this.props.profile.email}</p>
+        <p>{this.props.profile.address}</p>
       </div>
     );
   }
@@ -27,6 +21,7 @@ class RenderProfile extends Component {
 
 RenderProfile.propTypes = {
   getProfileInformation: React.PropTypes.func,
+  user: React.PropTypes.obj,
   profile: React.PropTypes.shape({
     fullName: React.PropTypes.string,
     email: React.PropTypes.string,
@@ -39,7 +34,10 @@ RenderProfile.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { profile: state.profile };
+  return {
+    profile: state.profile,
+    user: state.user,
+  };
 }
 
 export default connect(mapStateToProps, { getProfileInformation })(RenderProfile);

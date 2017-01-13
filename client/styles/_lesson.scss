@@ -1,0 +1,22 @@
+.presentation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+};
+
+.assignment {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: block;
+  border: none;
+  background-color: $light;
+  height: 100px;
+  width: 595px;
+  margin: 20px auto;
+  box-shadow: 10px 10px 5px lightgrey;
+  font-size: large;
+  background-color: $quaternary-color;
+  color: $light;
+  text-align: center;
+}

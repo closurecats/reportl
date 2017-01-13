@@ -6,6 +6,7 @@ import { getAllAttendees, markPresent, markAbsent } from '../actions/index';
 const containerStyle = {
   display: 'flex',
   flexWrap: 'wrap',
+  margin: '0 225px',
 };
 
 const greenCardStyle = {
@@ -37,12 +38,13 @@ const thumbnailStyle = {
   width: '200px',
 };
 
+const blankUrl = 'http://static.wixstatic.com/media/2653cd_02a8474e57b5420e8ae1f5b25ce3685c.jpg_srz_700_700_85_22_0.50_1.20_0.00_jpg_srz';
+
 class RenderAttendees extends Component {
   constructor(props) {
     super(props);
 
     const presentKids = this.props.attendees.filter(eachAttendee => eachAttendee.present);
-    console.log('presentKids', presentKids);
 
     this.state = {
       present: presentKids,
@@ -50,7 +52,6 @@ class RenderAttendees extends Component {
   }
 
   RenderAttendees() {
-    console.log('props: attendees: ', this.props.attendees);
     return this.props.attendees.map(eachAttendee => (
       <button
         onClick={() => {
@@ -58,17 +59,14 @@ class RenderAttendees extends Component {
 
           if (presentIndex === -1) {
             markPresent(eachAttendee.id);
-            console.log('present!');
             this.setState({ present: this.state.present.concat([eachAttendee.id]) });
           } else {
-            console.log('absent!');
             markAbsent(eachAttendee.id);
-            const newPresent = this.state.present.slice().splice(presentIndex, 1);
-            console.log('newPresent', newPresent);
+            this.state.present.splice(presentIndex, 1);
+            const newPresent = this.state.present.slice();
             this.setState({ present: newPresent });
           }
 
-          setTimeout(() => console.log('****', this.state), 2000);
           setTimeout(() => getAllAttendees({ meeting: eachAttendee.meetingId }), 500);
         }}
         style={this.state.present.indexOf(eachAttendee.id) !== -1 ? greenCardStyle : redCardStyle}
@@ -76,7 +74,7 @@ class RenderAttendees extends Component {
         <img
           style={thumbnailStyle}
           alt="Attendee"
-          src="http://localhost:8000/api/files/1"
+          src={(eachAttendee.user.profilePhotoId && `/api/files/${eachAttendee.user.profilePhotoId}`) || blankUrl}
         />
         {/* <img alt="Attendee" src={eachAttendee.user.imgUrl} />   */}
         <div>{eachAttendee.user.fullName}</div>
@@ -102,7 +100,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  console.log('state in mapStateToProps: ', state);
   return {
     attendees: state.attendees,
   };

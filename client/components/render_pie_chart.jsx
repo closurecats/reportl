@@ -67,8 +67,7 @@ const RenderPieChart = ({ gradeData, selectedUserGraph, selectedClassGraph }) =>
 
   return (
     <div>
-      <h3>Average Module Grades for {selectedUserGraph}
-         in {selectedClassGraph}</h3>
+      <h3>Average Module Grades for {selectedUserGraph} in {selectedClassGraph}</h3>
       <ReactHighcharts config={config} />
     </div>
   );

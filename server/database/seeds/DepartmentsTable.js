@@ -1,3 +1,7 @@
+const chance = require('chance')();
+
+// const randomInt = (max = 20, min = 3) => chance.integer({ min, max });
+
 exports.seed = (knex, Promise) => {
   const departmentsTable = 'departments';
   const coursesTable = 'courses';
@@ -13,7 +17,7 @@ exports.seed = (knex, Promise) => {
   const attendanceTable = 'attendance';
   const graphTable = 'graph_data';
 
-  const tableData = ['departments', 'courses', 'users_types', 'users', 'classes', 'calendar', 'modules', 'meetings', 'gradeable_objects_types', 'gradeable_objects', 'meetings', 'graph_data'];
+  const tableData = ['departments', 'courses', 'users_types', 'users', 'classes', 'calendar', 'modules', 'meetings', 'gradeable_objects_types', 'gradeable_objects', 'graph_data', 'students_classes', 'attendance'];
 
   const departmentData = [
     {
@@ -178,6 +182,14 @@ exports.seed = (knex, Promise) => {
       type_id: 2,
     },
   ];
+
+  userData.forEach((user) => {
+    user.phone_number = chance.phone();
+    const date = chance.date({ string: true }).split('/');
+    user.date_of_birth = `${date[2]}-${date[0]}-${date[1]}`;
+    user.address = chance.address();
+    user.profile_photo_id = user.id;
+  });
 
   const classData = [
     {
@@ -1499,7 +1511,9 @@ exports.seed = (knex, Promise) => {
   let graphCount = 1;
   classData.forEach((classItem) => {
     calendarData.forEach((calendarDay) => {
-      if (calendarDay.week_day === 'Tuesday' || calendarDay.week_day === 'Thursday') {
+      if (calendarDay.day_count > 47) return;
+
+      if ((calendarDay.week_day === 'Tuesday' && classItem.tuesday) || (calendarDay.week_day === 'Thursday' && classItem.thursday)) {
         meetingsArray.push({
           id: meetingCount,
           calendar_day: calendarDay.id,
@@ -1509,7 +1523,7 @@ exports.seed = (knex, Promise) => {
         });
         gradeableobjectArray.push({
           id: meetingCount,
-          object_name: `${gradeableObjectTypesData[meetingCount % 4].name} + ${meetingCount}`,
+          object_name: `${gradeableObjectTypesData[meetingCount % 4].name} ${meetingCount}`,
           type_id: gradeableObjectTypesData[meetingCount % 4].id,
           module_id: (classItem.id * 4) - Math.round(Math.random() * 3),
           meeting_id: meetingCount,
@@ -1534,6 +1548,10 @@ exports.seed = (knex, Promise) => {
       }
     });
   });
+
+  meetingsArray[20].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/3cXeLc0zGSVNeg';
+  meetingsArray[41].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/tnzva0UI2fTO0j';
+  meetingsArray[62].presentation_url = 'https://www.slideshare.net/slideshow/embed_code/key/CcxlJyMDDJuOqp';
 
   userData.forEach((user) => {
     if (user.type_id === 1) {

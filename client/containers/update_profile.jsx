@@ -1,46 +1,125 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { createProfileInformation } from '../actions/index';
 
-const UpdateProfile = ({ handleSubmit }) => (
-  <div>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="id">User ID</label>
-        <Field name="id" component="input" type="number" />
+class UpdateProfile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      id: this.props.user.id,
+      email: '',
+      description: '',
+      address: '',
+      phoneNumber: '',
+    };
+
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
+    this.onAddressChange = this.onAddressChange.bind(this);
+    this.onPhoneChange = this.onPhoneChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
+  onEmailChange(event) {
+    this.setState({ email: event });
+  }
+
+  onDescriptionChange(event) {
+    this.setState({ description: event });
+  }
+
+  onAddressChange(event) {
+    this.setState({ address: event });
+  }
+
+  onPhoneChange(event) {
+    this.setState({ phoneNumber: event });
+  }
+
+  onFormSubmit() {
+    this.setState({
+      email: '',
+      description: '',
+      address: '',
+      phoneNumber: '',
+      dateOfBirth: '',
+    });
+  }
+
+  render() {
+    return (
+      <div className="form">
+        <h2 className="formTitle">Update My Profile</h2>
+        <div className="label">Email</div>
+        <input
+          value={this.state.email}
+          className="field"
+          type="email"
+          onChange={(event) => {
+            this.onEmailChange(event.target.value);
+          }}
+        />
+        <br />
+        <div className="label">Personal Description</div>
+        <input
+          value={this.state.description}
+          className="field"
+          type="text"
+          onChange={(event) => {
+            this.onDescriptionChange(event.target.value);
+          }}
+        />
+        <br />
+        <div className="label">Address</div>
+        <input
+          value={this.state.address}
+          className="field"
+          type="text"
+          onChange={(event) => {
+            this.onAddressChange(event.target.value);
+          }}
+        />
+        <br />
+        <div className="label">Phone Number</div>
+        <input
+          value={this.state.phoneNumber}
+          className="field"
+          type="tel"
+          onChange={(event) => {
+            this.onPhoneChange(event.target.value);
+          }}
+        />
+        <br />
+        <Link to="/profile"><button
+          type="submit"
+          className="formButton"
+          onClick={() => {
+            this.props.createProfileInformation(this.state);
+            this.onFormSubmit();
+          }}
+
+        >Submit</button></Link>
       </div>
-      <div>
-        <label htmlFor="Update Email">Update Email</label>
-        <Field name="email" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="Add a personal description">Add Personal Description</label>
-        <Field name="description" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="Add your address">Address</label>
-        <Field name="address" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="Add your phone number">Phone</label>
-        <Field name="phoneNumber" component="input" type="tel" />
-      </div>
-      <div>
-        <label htmlFor="Add your date of birth">Date of Birth</label>
-        <Field name="dateOfBirth" component="input" type="date" />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-);
+    );
+  }
+}
 
 UpdateProfile.propTypes = {
-  handleSubmit: React.PropTypes.func,
+  createProfileInformation: React.PropTypes.func,
+  user: React.PropTypes.obj,
 };
 
-const UpdateProfileMaker = reduxForm({
-  form: 'profile',
-  onSubmit: createProfileInformation,
-})(UpdateProfile);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ createProfileInformation }, dispatch);
+}
 
-export default UpdateProfileMaker;
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile);

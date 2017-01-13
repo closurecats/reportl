@@ -1,0 +1,18 @@
+.profileCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: block;
+  border: none;
+  background-color: $light;
+  height: 420px;
+  width: 600px;
+  margin: 20px auto;
+  box-shadow: 10px 10px 5px lightgrey;
+  font-size: large;
+  text-align: center;
+}
+
+.profileImage {
+  margin: 30px auto;
+}

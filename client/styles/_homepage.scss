@@ -1,0 +1,33 @@
+.homepageTextBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: block;
+  border: none;
+  background-color: $light;
+  height: 200px;
+  margin: 0 auto;
+  box-shadow: 10px 10px 5px lightgrey;
+  font-size: large;
+  text-align: center;
+}
+
+
+.homepageText {
+  margin: 20px;
+}
+
+.homePagePhoto {
+  justify-content: center;
+  height: 350px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width:100%;
+  display: block;
+}
+
+.heroPhoto {
+  margin: 0px;
+  height: auto;
+  width:100%;
+}

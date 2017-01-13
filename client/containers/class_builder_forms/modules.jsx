@@ -1,39 +1,108 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { makeNewModule } from '../../actions/index';
 
-const ModuleForm = ({ handleSubmit }) => (
-  <div>
-    <h2>Module Form</h2>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="Class Id">Input ClassId</label>
-        <Field name="class_id" component="input" type="text" />
+class ModuleForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      module_name: '',
+      description: '',
+      percent_of_class_grade: '',
+      class_id: this.props.classes.id,
+    };
+
+    this.onModuleNameChange = this.onModuleNameChange.bind(this);
+    this.onDescriptionInputChange = this.onDescriptionInputChange.bind(this);
+    this.onPercentOfClassGradeChange = this.onPercentOfClassGradeChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
+
+  onModuleNameChange(event) {
+    this.setState({ module_name: event });
+  }
+
+  onDescriptionInputChange(event) {
+    this.setState({ description: event });
+  }
+
+  onPercentOfClassGradeChange(event) {
+    this.setState({ percent_of_class_grade: event });
+  }
+
+  onFormSubmit() {
+    this.setState({
+      module_name: '',
+      description: '',
+      percent_of_class_grade: '',
+      class_id: '',
+    });
+  }
+
+  render() {
+    return (
+      <div className="form">
+        <h2 className="formTitle">Add {this.props.classes.name} Modules</h2>
+        <div className="label">Module Name</div>
+        <input
+          className="field"
+          value={this.state.module_name}
+          type="text"
+          onChange={(event) => {
+            this.onModuleNameChange(event.target.value);
+          }}
+        />
+        <br />
+        <div className="label">Module Description</div>
+        <input
+          className="field"
+          value={this.state.description}
+          type="text"
+          onChange={(event) => {
+            this.onDescriptionInputChange(event.target.value);
+          }}
+        />
+        <br />
+        <div className="label">Percent of Class Grade</div>
+        <input
+          className="field"
+          value={this.state.percent_of_class_grade}
+          type="number"
+          onChange={(event) => {
+            this.onPercentOfClassGradeChange(event.target.value);
+          }}
+        />
+        <br />
+        <button
+          className="formButton"
+          type="submit"
+          onClick={() => {
+            this.props.makeNewModule(this.state);
+            this.onFormSubmit();
+          }}
+
+        >Submit</button>
       </div>
-      <div>
-        <label htmlFor="Module Name">Module Name</label>
-        <Field name="module_name" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="Percent of Grade">Percent of Class Grade</label>
-        <Field name="percent_of_class_grade" component="input" type="number" />
-      </div>
-      <div>
-        <label htmlFor="tags">Tags</label>
-        <Field name="Tags" component="input" type="text" />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-);
+    );
+  }
+}
 
 ModuleForm.propTypes = {
-  handleSubmit: React.PropTypes.func,
+  makeNewModule: React.PropTypes.func,
+  classes: React.PropTypes.obj,
 };
 
-const ModuleMakerForm = reduxForm({
-  form: 'addClassModule',
-  onSubmit: makeNewModule,
-})(ModuleForm);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ makeNewModule }, dispatch);
+}
 
-export default ModuleMakerForm;
+function mapStateToProps(state) {
+  return {
+    classes: state.classes,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleForm);

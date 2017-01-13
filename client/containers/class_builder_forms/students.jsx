@@ -1,37 +1,72 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { bindActionCreators } from 'redux';
 import { addStudentsToClass } from '../../actions/index';
 
-const StudentForm = ({ handleSubmit, classId }) => (
-  <div>
-    <h2>Student Form</h2>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="student_id">Student ID</label>
-        <Field name="student_id" component="input" type="text" />
+class StudentForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      student_id: '',
+      class_id: this.props.classes.id,
+    };
+
+    this.onStudentIdChange = this.onStudentIdChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
+  onStudentIdChange(event) {
+    this.setState({ student_id: event });
+  }
+
+  onFormSubmit() {
+    this.setState({
+      student_id: '',
+    });
+  }
+
+  render() {
+    return (
+      <div className="form">
+        <h2 className="formTitle">Add {this.props.classes.name} Students</h2>
+        <div className="label">Student ID</div>
+        <input
+          className="field"
+          value={this.state.student_id}
+          type="number"
+          onChange={(event) => {
+            this.onStudentIdChange(event.target.value);
+          }}
+        />
+        <br />
+        <button
+          className="formButton"
+          type="submit"
+          onClick={() => {
+            this.props.addStudentsToClass(this.state);
+            this.onFormSubmit();
+          }}
+
+        >Submit</button>
       </div>
-      <div>
-        <p>Class id: {classId}</p>
-        <label htmlFor="class_id">Class Id</label>
-        <Field name="class_id" component="input" type="text" value={this.props.classId} />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-);
+    );
+  }
+}
 
 StudentForm.propTypes = {
-  handleSubmit: React.PropTypes.func,
-  classId: React.PropTypes.string,
+  addStudentsToClass: React.PropTypes.func,
+  classes: React.PropTypes.obj,
 };
 
-const StudentMakerForm = reduxForm({
-  form: 'addStudents',
-})(StudentForm);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ addStudentsToClass }, dispatch);
+}
 
-export default connect(state => ({
-  classId: state.classId,
-}), {
-  onSubmit: addStudentsToClass,
-})(StudentMakerForm);
+function mapStateToProps(state) {
+  return {
+    classes: state.classes,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);

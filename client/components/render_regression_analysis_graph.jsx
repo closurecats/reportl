@@ -64,8 +64,7 @@ const RenderScatterPlotChart = ({ gradeData, selectedUserGraph, selectedClassGra
 
   return (
     <div>
-      <h3>Grading Trends for {selectedUserGraph} in
-         {selectedClassGraph}</h3>
+      <h3>Grading Trends for {selectedUserGraph} in {selectedClassGraph}</h3>
       <ReactHighcharts config={config} />
     </div>
   );

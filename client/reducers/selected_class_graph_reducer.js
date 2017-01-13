@@ -1,5 +1,4 @@
-export default function (state = 'American Literature', action) {
-  console.log('Selected Class', action.payload);
+export default function (state = ['American Literature'], action) {
   switch (action.type) {
     case 'SET_SELECTED_CLASS':
       return action.payload;

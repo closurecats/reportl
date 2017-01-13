@@ -3,7 +3,7 @@ const Calendar = require('../models/calendarModel');
 const calendarController = {
   getAll(req, res) {
     Calendar.fetchAll({
-      withRelated: ['meetings'],
+      withRelated: ['meetings.class'],
     })
     .then(calendar => res.json(calendar))
     .catch((err) => {

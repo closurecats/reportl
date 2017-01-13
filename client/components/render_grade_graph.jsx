@@ -72,8 +72,9 @@ class RenderGradeChart extends Component {
 
     return (
       <div>
-        <h3>Module Breakdown for {this.props.selectedUserGraph}
-           in {this.props.selectedClassGraph}</h3>
+        <h3>
+          Module Breakdown for {this.props.selectedUserGraph} in {this.props.selectedClassGraph}
+        </h3>
         <p>(Click to Drill Down)</p>
         <ReactHighcharts config={config} />
       </div>

@@ -24,7 +24,7 @@ const RenderAreaChart = ({ gradeData, selectedClassGraph }) => {
         {
           name: `${item.module.moduleName} ${item.gradeableobjects.objectName}`,
           parent: item.module.id,
-          value: item.grade,
+          value: 0.05,
         },
       ];
     } else if (tempObject[item.module.moduleName].length < 5) {
@@ -32,7 +32,7 @@ const RenderAreaChart = ({ gradeData, selectedClassGraph }) => {
         {
           name: `${item.module.moduleName} ${item.gradeableobjects.objectName}`,
           parent: item.module.id,
-          value: item.grade,
+          value: 0.05,
         });
     }
   });
@@ -46,11 +46,11 @@ const RenderAreaChart = ({ gradeData, selectedClassGraph }) => {
   const config = {
     series: [{
       type: 'treemap',
-      layoutAlgorithm: 'sliceAndDice',
+      layoutAlgorithm: 'squarified',
       alternateStartingDirection: true,
       levels: [{
         level: 1,
-        layoutAlgorithm: 'sliceAndDice',
+        layoutAlgorithm: 'squarified',
         dataLabels: {
           enabled: true,
           align: 'left',

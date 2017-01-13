@@ -1,12 +1,13 @@
 const Class = require('../models/classModel');
 require('../models/moduleModel');
 require('../models/userModel');
+        // withRelated: ['course', 'modules', 'users', 'teacher'],
 
 const classController = {
   getClassById({ params: { id } }, res) {
     Class.forge({ id })
       .fetch({
-        withRelated: ['course', 'modules', 'users', 'teacher'],
+        withRelated: ['course', 'modules', 'users'],
       })
       .then((clas) => {
         console.log(JSON.stringify(clas));
@@ -18,7 +19,7 @@ const classController = {
       });
   },
 
-  newClass({ body: classData }, res) {
+  makeNewClass({ body: classData }, res) {
     Class.forge(classData)
       .save()
       .then((clas) => {
@@ -26,6 +27,20 @@ const classController = {
       })
       .catch((err) => {
         console.log(`classController.newClass - Error: ${err}`);
+        res.sendStatus(500);
+      });
+  },
+
+  updateClassById({ params: { id }, body: classData }, res) {
+    Class.forge({ id })
+      .fetch()
+      .then((clas) => {
+        Object.keys(classData).forEach(key => clas.set(key, classData[key]));
+        return clas.save();
+      })
+      .then(clas => res.json(clas))
+      .catch((err) => {
+        console.log(`courseController.updateCourseById - Error: ${err}`);
         res.sendStatus(500);
       });
   },
