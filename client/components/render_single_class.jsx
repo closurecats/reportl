@@ -22,7 +22,9 @@ class RenderSingleClass extends Component {
               <div className="leftColumn">{classInfo.modules.map(module => (
                 <div className="itemBlock">
                   <div className="titleBlock">{module.moduleName}</div>
-                  <div className="textBlock">Percent of Class Grade: {module.percentOfClassGrade}</div>
+                  <div className="textBlock">
+                    Percent of Class Grade: {module.percentOfClassGrade}
+                  </div>
                   <div className="textBlock">Start Date: {module.startDate.slice(5, 10)}</div>
                   <div className="textBlock">End Date: {module.endDate.slice(5, 10)}</div>
                 </div>

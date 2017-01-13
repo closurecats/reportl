@@ -15,7 +15,11 @@ class FormList extends Component {
   renderList() {
     // TODO: Get a unique key
     return AppComponents.map((component, index) => (
-      <button key={index} className="labelClassBuild" onClick={() => { this.props.selectForm(component[1]); }}>
+      <button
+        key={index}
+        className="labelClassBuild"
+        onClick={() => { this.props.selectForm(component[1]); }}
+      >
         {component[0]}
       </button>
     ));
