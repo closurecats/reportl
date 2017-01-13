@@ -51,38 +51,42 @@ class UpdateProfile extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Update My Profile</h2>
-        <p>Email</p>
+      <div className="form">
+        <h2 className="formTitle">Update My Profile</h2>
+        <div className="label">Email</div>
         <input
           value={this.state.email}
+          className="field"
           type="email"
           onChange={(event) => {
             this.onEmailChange(event.target.value);
           }}
         />
         <br />
-        <p>Personal Description</p>
+        <div className="label">Personal Description</div>
         <input
           value={this.state.description}
+          className="field"
           type="text"
           onChange={(event) => {
             this.onDescriptionChange(event.target.value);
           }}
         />
         <br />
-        <p>Address</p>
+        <div className="label">Address</div>
         <input
           value={this.state.address}
+          className="field"
           type="text"
           onChange={(event) => {
             this.onAddressChange(event.target.value);
           }}
         />
         <br />
-        <p>Phone Number</p>
+        <div className="label">Phone Number</div>
         <input
           value={this.state.phoneNumber}
+          className="field"
           type="tel"
           onChange={(event) => {
             this.onPhoneChange(event.target.value);
@@ -91,6 +95,7 @@ class UpdateProfile extends Component {
         <br />
         <Link to="/profile"><button
           type="submit"
+          className="formButton"
           onClick={() => {
             this.props.createProfileInformation(this.state);
             this.onFormSubmit();
