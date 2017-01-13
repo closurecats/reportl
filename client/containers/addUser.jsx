@@ -15,6 +15,10 @@ const UserForm = ({ handleSubmit }) => (
         <Field className="field" name="lastName" component="input" type="text" />
       </div>
       <div>
+        <label className="label" htmlFor="password">Password</label>
+        <Field className="field" name="password" component="input" type="password" />
+      </div>
+      <div>
         <label className="label" htmlFor="email">Email</label>
         <Field className="field" name="email" component="input" type="email" />
       </div>
