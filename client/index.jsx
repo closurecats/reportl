@@ -30,7 +30,6 @@ import RenderAnalytics from './components/render_analytics';
 import RenderLessonForStudent from './components/render_lesson_student';
 import RenderSetupForm from './containers/setup_school_forms/render_setup_form';
 import Homepage from './components/homepage';
-import RenderLessonForStudent from './components/render_lesson_student';
 
 const isAuth = () => !!store.getState().user.id;
 
