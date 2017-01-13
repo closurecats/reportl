@@ -151,18 +151,17 @@ $light: #fdf7f4;
 }
 
 .dailySchedule {
+  border-style: none;
   text-align: center;
   font-size: 25px;
+  color: black;
   border-radius: 10px;
-  color: #297CBB;
-
 }
 
 .dailySchedule {
   button {
-    border-radius: 10px;
     margin-right: 5px;
-    background-color: #8abee5;
+    background-color: $quaternary-color;
     font-size: 20px;
     height: 30px;
   }
