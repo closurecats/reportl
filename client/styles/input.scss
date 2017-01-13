@@ -15,6 +15,7 @@ $light: #fdf7f4;
 @import 'lesson';
 @import 'profile';
 @import 'homepage';
+@import 'forms';
 
 .courseCatalogButton{
   background-color: $primary-color;
@@ -74,7 +75,6 @@ $light: #fdf7f4;
   color: $light;
   font: $font-stack;
   box-shadow: 10px 10px 5px lightgrey;
-  justify-content: center;
 }
 
 .userCardContainer {
