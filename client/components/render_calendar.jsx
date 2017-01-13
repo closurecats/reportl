@@ -35,8 +35,6 @@ class RenderCalendar extends Component {
 
     const thisWeek = this.props.calendarData.filter(isThisWeek);
 
-    console.log('thisWeek: ', thisWeek);
-
     if (!thisWeek.length) {
       return false;
     }
@@ -81,9 +79,6 @@ class RenderCalendar extends Component {
     if (!firstDay.length) {
       return false;
     }
-    console.log('RENDER', this.props.calendarData.length);
-    console.log('firstDay', firstDay);
-    console.log('this.state.startDay', this.state.startDay);
     return (
       <div className="calContain">
         <button className="calButton" onClick={() => this.changeWeek('last')}>Last</button>

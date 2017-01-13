@@ -45,7 +45,6 @@ class RenderAttendees extends Component {
     super(props);
 
     const presentKids = this.props.attendees.filter(eachAttendee => eachAttendee.present);
-    console.log('presentKids', presentKids);
 
     this.state = {
       present: presentKids,
@@ -53,7 +52,6 @@ class RenderAttendees extends Component {
   }
 
   RenderAttendees() {
-    console.log('props: attendees: ', this.props.attendees);
     return this.props.attendees.map(eachAttendee => (
       <button
         onClick={() => {
@@ -61,18 +59,14 @@ class RenderAttendees extends Component {
 
           if (presentIndex === -1) {
             markPresent(eachAttendee.id);
-            console.log('present!');
             this.setState({ present: this.state.present.concat([eachAttendee.id]) });
           } else {
-            console.log('absent!');
             markAbsent(eachAttendee.id);
             this.state.present.splice(presentIndex, 1);
             const newPresent = this.state.present.slice();
-            console.log('newPresent', newPresent);
             this.setState({ present: newPresent });
           }
 
-          setTimeout(() => console.log('****', this.state), 2000);
           setTimeout(() => getAllAttendees({ meeting: eachAttendee.meetingId }), 500);
         }}
         style={this.state.present.indexOf(eachAttendee.id) !== -1 ? greenCardStyle : redCardStyle}
@@ -106,7 +100,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  console.log('state in mapStateToProps: ', state);
   return {
     attendees: state.attendees,
   };

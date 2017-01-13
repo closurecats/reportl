@@ -6,7 +6,6 @@ import { getAllAttendees } from '../actions/index';
 class RenderGradeables extends Component {
 
   renderGradeables() {
-    console.log('props: gradeables: ', this.props.gradeables);
     return this.props.gradeables.map(eachObj => (
       <div>
         <div key={eachObj.objectName}>
