@@ -8,7 +8,6 @@ class RenderTeachers extends Component {
   }
 
   renderTeachers() {
-    console.log('props: allTeachers: ', this.props.allTeachers);
     return this.props.allTeachers.map(eachTeacher => (
       <div className="userCard">
         <img className="userThumbnail" alt="profile" src={`/api/files/${eachTeacher.profilePhotoId}`} />
@@ -44,7 +43,6 @@ RenderTeachers.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log('state in mapStateToProps: ', state);
   return {
     allTeachers: state.allTeachers,
   };
