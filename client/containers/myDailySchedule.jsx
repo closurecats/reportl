@@ -5,20 +5,19 @@ import { Link } from 'react-router';
 import { searchCalendar, getMeetingById, getAllAttendees, getChartData } from '../actions/index';
 
 const calendarStyle = {
+  borderStyle: 'none',
   display: 'block',
-  borderStyle: 'solid',
   backgroundColor: 'white',
   height: '400px',
   width: '500px',
   margin: '10px',
-  borderWidth: 'thick',
   fontSize: 'x-large',
-  padding: '5px',
+  padding: '2px',
 };
 
 const meetingStyle = {
   borderStyle: 'none',
-  backgroundColor: 'grey',
+  backgroundColor: '#64e3ba',
   height: '100px',
   width: '500px',
   margin: '25px 0 0 0',
@@ -57,7 +56,7 @@ class renderDailySchedule extends Component {
   renderDayMeetings(day) {
     return (
       <div>
-        <div>
+        <div className="calWeekDay">
           Class for {`${day.weekDay} ${day.dayOfMonth}, ${day.month}`}
         </div>
         <div>

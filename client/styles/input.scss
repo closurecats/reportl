@@ -15,6 +15,7 @@ $light: #fdf7f4;
 @import 'lesson';
 @import 'profile';
 @import 'homepage';
+@import 'forms';
 
 .courseCatalogButton{
   background-color: $primary-color;
@@ -74,7 +75,6 @@ $light: #fdf7f4;
   color: $light;
   font: $font-stack;
   box-shadow: 10px 10px 5px lightgrey;
-  justify-content: center;
 }
 
 .userCardContainer {
@@ -151,18 +151,17 @@ $light: #fdf7f4;
 }
 
 .dailySchedule {
+  border-style: none;
   text-align: center;
   font-size: 25px;
+  color: black;
   border-radius: 10px;
-  color: #297CBB;
-
 }
 
 .dailySchedule {
   button {
-    border-radius: 10px;
     margin-right: 5px;
-    background-color: #8abee5;
+    background-color: $quaternary-color;
     font-size: 20px;
     height: 30px;
   }
