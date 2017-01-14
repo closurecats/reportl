@@ -1,7 +1,7 @@
 import { hashHistory } from 'react-router';
 
-const loginPath = '/profile';
-const logoutPath = '/';
+const loginPath = '/dashboard';
+const logoutPath = '/login';
 const parseToken = jwt => JSON.parse(window.atob(jwt.split('.')[1].replace('-', '+').replace('_', '/')));
 
 export default function (state = { id: 0 }, action) {
