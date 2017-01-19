@@ -10,10 +10,12 @@ class ClassMaker extends Component {
     this.state = {
       name: '',
       teacher_id: '',
+      course_id: '',
       size: '',
     };
 
     this.onClassNameInputChange = this.onClassNameInputChange.bind(this);
+    this.onCourseNameInputChange = this.onCourseNameInputChange.bind(this);
     this.onTeacherIdInputChange = this.onTeacherIdInputChange.bind(this);
     this.onSizeInputChange = this.onSizeInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -22,6 +24,10 @@ class ClassMaker extends Component {
 
   onClassNameInputChange(event) {
     this.setState({ name: event });
+  }
+
+  onCourseNameInputChange(event) {
+    this.setState({ course_id: event });
   }
 
   onTeacherIdInputChange(event) {
@@ -35,8 +41,8 @@ class ClassMaker extends Component {
   onFormSubmit() {
     this.setState({
       name: '',
+      course_id: '',
       teacher_id: '',
-      description: '',
       size: '',
     });
   }
@@ -52,6 +58,16 @@ class ClassMaker extends Component {
           type="text"
           onChange={(event) => {
             this.onClassNameInputChange(event.target.value);
+          }}
+        />
+        <br />
+        <div className="label">Course ID</div>
+        <input
+          className="field"
+          value={this.state.course_id}
+          type="text"
+          onChange={(event) => {
+            this.onCourseNameInputChange(event.target.value);
           }}
         />
         <br />
